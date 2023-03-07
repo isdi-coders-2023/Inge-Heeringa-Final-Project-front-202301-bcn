@@ -5,3 +5,5 @@ export const loginUser = createAction(
   "[User] Login User",
   props<{ payload: User }>()
 );
+
+export const defaultAction = createAction("default");
