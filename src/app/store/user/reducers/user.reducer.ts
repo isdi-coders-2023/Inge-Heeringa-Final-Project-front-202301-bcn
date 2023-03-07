@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { UserState } from "../../types";
-import { loginUsers } from "../actions/user.actions";
+import { loginUser } from "../actions/user.actions";
 
 export const initialState: UserState = {
   email: "",
@@ -13,7 +13,7 @@ export const userFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(
-      loginUsers,
+      loginUser,
       (currentState, { payload }): UserState => ({
         ...currentState,
         ...payload,

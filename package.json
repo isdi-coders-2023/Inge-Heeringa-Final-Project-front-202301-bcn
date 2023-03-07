@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage --watchAll=false --passWithNoTests",
+    "test": "jest",
+    "test:coverage": "jest --coverage --watchAll=false",
     "format": "npx prettier 'src/**/*.{js,jsx,ts,tsx,html,css,scss}' --write",
     "prepare": "husky install",
     "lint": "ng lint"
