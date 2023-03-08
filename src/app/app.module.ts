@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { ReactiveFormsModule } from "@angular/forms";
 import { UserModule } from "./store/user/user.module";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
+import { MaterialModule } from "./material/material.module";
 
 @NgModule({
   declarations: [AppComponent, LoginFormComponent],
@@ -22,8 +23,9 @@ import { LoginFormComponent } from "./components/login-form/login-form.component
     }),
     UserModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, LoginFormComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
