@@ -1,6 +1,17 @@
 import { render, screen } from "@testing-library/angular";
+import userEvent from "@testing-library/user-event";
+import { MatInputModule } from "@angular/material/input";
 import "@testing-library/jest-dom";
 import { LoginFormComponent } from "./login-form.component";
+import { TestBed } from "@angular/core/testing";
+import { ReactiveFormsModule } from "@angular/forms";
+
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    imports: [MatInputModule, ReactiveFormsModule],
+    declarations: [LoginFormComponent],
+  }).compileComponents();
+});
 
 describe("Given a LoginForm component", () => {
   describe("When rendered", () => {
@@ -23,7 +34,7 @@ describe("Given a LoginForm component", () => {
     });
 
     test("Then it should show an input field for an email address", async () => {
-      const labelText = /email/i;
+      const labelText = "Email";
 
       await render(LoginFormComponent);
 
@@ -33,7 +44,7 @@ describe("Given a LoginForm component", () => {
     });
 
     test("Then it should show an input field for a password", async () => {
-      const labelText = /password/i;
+      const labelText = "Password";
 
       await render(LoginFormComponent);
 
@@ -60,6 +71,125 @@ describe("Given a LoginForm component", () => {
       const redirectLink = screen.getByRole("link", { name: linkText });
 
       expect(redirectLink).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user enters an email with a correct format", () => {
+    test("Then it should not show any validation errors", async () => {
+      await render(LoginFormComponent);
+
+      const emailInput = screen.getByLabelText("Email");
+
+      await userEvent.click(emailInput);
+      await userEvent.type(emailInput, "mock@user.com");
+      await userEvent.tab();
+
+      expect(emailInput.getAttribute("aria-invalid")).toBe("false");
+    });
+  });
+
+  describe("When the user's email address does not have the correct format", () => {
+    test("Then it should show the validation error 'Not a valid email'", async () => {
+      const expectedErrorMessage = /not a valid email/i;
+
+      await render(LoginFormComponent);
+
+      const emailInput = screen.getByLabelText("Email");
+
+      await userEvent.click(emailInput);
+      await userEvent.type(emailInput, "mock@user");
+      await userEvent.tab();
+
+      const errorMessage = screen.queryByText(expectedErrorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user unfocuses the email field leaving it empty", () => {
+    test("Then it should show the validation error 'You must enter an email address'", async () => {
+      const expectedErrorMessage = /you must enter an email address/i;
+
+      await render(LoginFormComponent);
+
+      const emailInput = screen.getByLabelText("Email");
+
+      await userEvent.click(emailInput);
+      await userEvent.type(emailInput, "{enter}");
+      await userEvent.tab();
+
+      const errorMessage = screen.getByText(expectedErrorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user enters a password between 8 and 20 characters", () => {
+    test("Then it should not show any validation errors", async () => {
+      await render(LoginFormComponent);
+
+      const passwordInput = screen.getByLabelText("Password");
+
+      await userEvent.click(passwordInput);
+      await userEvent.type(passwordInput, "password123");
+      await userEvent.tab();
+
+      expect(passwordInput.getAttribute("aria-invalid")).toBe("false");
+    });
+  });
+
+  describe("When the entered password is shorter than 8 characters", () => {
+    test("Then it should show the validation error 'Password must be at least 8 characters long'", async () => {
+      const expectedErrorMessage =
+        /password must be at least 8 characters long/i;
+
+      await render(LoginFormComponent);
+
+      const passwordInput = screen.getByLabelText("Password");
+
+      await userEvent.click(passwordInput);
+      await userEvent.type(passwordInput, "1234");
+      await userEvent.tab();
+
+      const errorMessage = screen.queryByText(expectedErrorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the entered password is longer than 20 characters", () => {
+    test("Then it should show the validation error 'Maximum password length is 20 characters'", async () => {
+      const expectedErrorMessage = /maximum password length is 20 characters/i;
+
+      await render(LoginFormComponent);
+
+      const passwordInput = screen.getByLabelText("Password");
+
+      await userEvent.click(passwordInput);
+      await userEvent.type(passwordInput, "thisPasswordIsSuperSafe123");
+      await userEvent.tab();
+
+      const errorMessage = screen.queryByText(expectedErrorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user unfocuses the password field leaving it empty", () => {
+    test("Then it should show the validation error 'You must enter a password address'", async () => {
+      const expectedErrorMessage = /you must enter a password/i;
+
+      await render(LoginFormComponent);
+
+      const passwordInput = screen.getByLabelText("Password");
+
+      await userEvent.click(passwordInput);
+      await userEvent.type(passwordInput, "{enter}");
+      await userEvent.tab();
+
+      const errorMessage = screen.getByText(expectedErrorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });

@@ -25,26 +25,34 @@ export class LoginFormComponent {
   constructor(private fb: FormBuilder) {}
 
   getErrorMessageEmail() {
-    if (this.loginForm.controls["email"].hasError("required")) {
+    const emailControl = this.loginForm.controls["email"];
+
+    if (emailControl.hasError("required")) {
       return "You must enter an email address";
     }
 
-    return this.loginForm.controls["email"].hasError("email" || "pattern")
-      ? "Not a valid email"
-      : "";
+    if (emailControl.hasError("pattern")) {
+      return "Not a valid email";
+    }
+
+    return "";
   }
 
   getErrorMessagePassword() {
-    if (this.loginForm.controls["password"].hasError("required")) {
+    const passwordControl = this.loginForm.controls["password"];
+
+    if (passwordControl.hasError("required")) {
       return "You must enter a password";
     }
 
-    if (this.loginForm.controls["password"].hasError("minlength")) {
+    if (passwordControl.hasError("minlength")) {
       return "Password must be at least 8 characters long";
     }
 
-    return this.loginForm.controls["password"].hasError("maxlength")
-      ? "Maximum password length is 20 characters"
-      : "";
+    if (passwordControl.hasError("maxlength")) {
+      return "Maximum password length is 20 characters";
+    }
+
+    return "";
   }
 }
