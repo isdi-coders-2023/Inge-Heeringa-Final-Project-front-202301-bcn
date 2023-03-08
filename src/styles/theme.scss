@@ -1,0 +1,28 @@
+@use "@angular/material" as mat;
+@use "variables";
+
+@include mat.core();
+
+$my-app-primary: mat.define-palette(mat.$grey-palette);
+$my-app-accent: mat.define-palette(mat.$orange-palette);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+$my-typography: mat.define-typography-config(
+  $headline-5:
+    mat.define-typography-level(
+      $font-family: variables.$display-font,
+      $font-size: 50px,
+    ),
+);
+
+$my-app-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    ),
+    typography: $my-typography,
+  )
+);
+
+@include mat.all-component-themes($my-app-theme);

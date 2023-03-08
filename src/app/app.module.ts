@@ -6,9 +6,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { UserModule } from "./store/user/user.module";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
