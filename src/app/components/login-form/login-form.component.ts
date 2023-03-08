@@ -7,6 +7,6 @@ import { FormControl } from "@angular/forms";
   styleUrls: ["./login-form.component.scss"],
 })
 export class LoginFormComponent {
-  emailControl = new FormControl();
-  passwordControl = new FormControl();
+  emailFormControl = new FormControl();
+  passwordFormControl = new FormControl();
 }
