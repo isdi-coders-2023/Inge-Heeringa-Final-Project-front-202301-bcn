@@ -1,0 +1,11 @@
+<form class="login-form">
+  <label class="login-form__email-label" for="email">
+    <input class="login-form__email-input" type="text" id="email" [formControl]="emailControl">
+  </label>
+  <label class="login-form__password-label" for="password">
+    <input class="login-form__password-input" type="password" id="password" [formControl]="passwordControl">
+  </label>
+  <button class="login-form__submit-button" type="submit">Log in</button>
+  <a class="login-form__register-redirect">Not a member yet? <span class="login-form__register-redirect--cta">Sign
+      up</span></a>
+</form>

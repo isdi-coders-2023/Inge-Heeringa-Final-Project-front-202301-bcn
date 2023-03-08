@@ -5,10 +5,12 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { ReactiveFormsModule } from "@angular/forms";
 import { UserModule } from "./store/user/user.module";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,8 +21,9 @@ import { UserModule } from "./store/user/user.module";
       logOnly: !isDevMode(),
     }),
     UserModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, LoginFormComponent],
 })
 export class AppModule {}
