@@ -1,0 +1,15 @@
+<h1 class="title title--login">Log in</h1>
+<form class="login-form">
+  <mat-form-field class="login-form__field" appearance="outline" color="accent">
+    <mat-label class="login-form__label" for="email">Email</mat-label>
+    <input class="login-form__input" type="email" id="email" matInput [formControl]="emailFormControl">
+  </mat-form-field>
+  <mat-form-field class="login-form__field" appearance="outline" color="accent">
+    <mat-label class="login-form__label" for="password">Password</mat-label>
+    <input class="login-form__input" type="password" id="password" matInput [formControl]="passwordFormControl">
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" class="login-form__submit-button" type="submit">Log in</button>
+</form>
+<a href="/" class="register-redirect">Not a member yet? <span class="register-redirect--cta">Sign
+    up</span></a>
