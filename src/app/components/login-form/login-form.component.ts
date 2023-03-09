@@ -1,7 +1,10 @@
+import decode from "jwt-decode";
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { UserCredentials } from "src/app/types";
-import { UserService } from "src/app/services/user.service";
+import { UserService } from "../../services/user.service";
+import { CustomTokenPayload, UserCredentials } from "../../types";
+import { Store } from "@ngrx/store";
+import { loginUser } from "../../store/user/actions/user.actions";
 
 @Component({
   selector: "app-login-form",
@@ -26,16 +29,22 @@ export class LoginFormComponent {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly store: Store
   ) {}
 
   onSubmit() {
-    const userCredentials: UserCredentials = {
-      email: this.loginForm.controls.email.value!,
-      password: this.loginForm.controls.password.value!,
-    };
+    const userCredentials = this.loginForm.value as UserCredentials;
 
-    this.userService.login(userCredentials).subscribe();
+    this.userService.login(userCredentials).subscribe(async (data) => {
+      const { token } = data;
+
+      const { email } = decode(token) as CustomTokenPayload;
+
+      localStorage.setItem("token", token);
+
+      this.store.dispatch(loginUser({ payload: { email, token } }));
+    });
   }
 
   getErrorMessageEmail() {

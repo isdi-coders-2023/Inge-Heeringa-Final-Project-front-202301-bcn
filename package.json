@@ -29,6 +29,7 @@
     "@ngrx/store": "^15.3.0",
     "@ngrx/store-devtools": "^15.3.0",
     "@testing-library/user-event": "^14.4.3",
+    "jwt-decode": "^3.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
