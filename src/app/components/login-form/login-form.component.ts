@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { UserCredentials } from "src/app/types";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-login-form",
@@ -22,10 +24,22 @@ export class LoginFormComponent {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly userService: UserService
+  ) {}
+
+  onSubmit() {
+    const userCredentials: UserCredentials = {
+      email: this.loginForm.controls.email.value!,
+      password: this.loginForm.controls.password.value!,
+    };
+
+    this.userService.login(userCredentials).subscribe();
+  }
 
   getErrorMessageEmail() {
-    const emailControl = this.loginForm.controls["email"];
+    const emailControl = this.loginForm.controls.email;
 
     if (emailControl.hasError("required")) {
       return "You must enter an email address";
@@ -39,7 +53,7 @@ export class LoginFormComponent {
   }
 
   getErrorMessagePassword() {
-    const passwordControl = this.loginForm.controls["password"];
+    const passwordControl = this.loginForm.controls.password;
 
     if (passwordControl.hasError("required")) {
       return "You must enter a password";
