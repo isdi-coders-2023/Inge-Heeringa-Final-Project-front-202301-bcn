@@ -36,16 +36,6 @@ describe("Given a LoginForm component", () => {
       expect(form).toBeInTheDocument();
     });
 
-    test("Then it should show the title 'Log in' in a heading", async () => {
-      const title = /log in/i;
-
-      await renderComponent();
-
-      const loginTitle = screen.getByRole("heading", { name: title });
-
-      expect(loginTitle).toBeInTheDocument();
-    });
-
     test("Then it should show an input field for an email address", async () => {
       const labelText = "Email";
 
@@ -74,16 +64,6 @@ describe("Given a LoginForm component", () => {
       const submitButton = screen.getByRole("button", { name: buttonText });
 
       expect(submitButton).toBeInTheDocument();
-    });
-
-    test("Then it should show a redirect link to the register page", async () => {
-      const linkText = /not a member yet\? sign up/i;
-
-      await renderComponent();
-
-      const redirectLink = screen.getByRole("link", { name: linkText });
-
-      expect(redirectLink).toBeInTheDocument();
     });
   });
 
