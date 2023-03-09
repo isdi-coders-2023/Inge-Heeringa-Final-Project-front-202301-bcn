@@ -1,13 +1,11 @@
 @use "../../../styles/partials/variables";
 
 :host {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
-  padding: 30px;
+  width: 100%;
 }
 
 .login-form {
@@ -29,21 +27,7 @@
   }
 }
 
-.register-redirect {
-  color: variables.$secondary-color;
-  font-size: 1rem;
-
-  &--cta {
-    color: map-get(variables.$accent-color, "main");
-    font-weight: 900;
-  }
-}
-
 @media (min-width: 768px) {
-  .title--login {
-    align-self: center;
-  }
-
   .login-form {
     width: 300px;
   }
