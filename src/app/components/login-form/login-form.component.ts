@@ -46,36 +46,4 @@ export class LoginFormComponent {
       this.store.dispatch(loginUser({ payload: { email, token } }));
     });
   }
-
-  getErrorMessageEmail() {
-    const emailControl = this.loginForm.controls.email;
-
-    if (emailControl.hasError("required")) {
-      return "You must enter an email address";
-    }
-
-    if (emailControl.hasError("pattern")) {
-      return "Not a valid email";
-    }
-
-    return "";
-  }
-
-  getErrorMessagePassword() {
-    const passwordControl = this.loginForm.controls.password;
-
-    if (passwordControl.hasError("required")) {
-      return "You must enter a password";
-    }
-
-    if (passwordControl.hasError("minlength")) {
-      return "Password must be at least 8 characters long";
-    }
-
-    if (passwordControl.hasError("maxlength")) {
-      return "Maximum password length is 20 characters";
-    }
-
-    return "";
-  }
 }
