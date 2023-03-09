@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/angular";
+import { render, screen, waitFor } from "@testing-library/angular";
 import userEvent from "@testing-library/user-event";
 import { MatInputModule } from "@angular/material/input";
 import "@testing-library/jest-dom";
@@ -7,7 +7,10 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { provideMockStore } from "@ngrx/store/testing";
+import { getMockStore, MockStore, provideMockStore } from "@ngrx/store/testing";
+import { UserCredentials, UserState } from "src/app/types";
+import { Store, StoreModule, StoreRootModule } from "@ngrx/store";
+import { MockUserService } from "../../services/user.service.mock";
 
 describe("Given a LoginForm component", () => {
   describe("When rendered", () => {
@@ -225,6 +228,49 @@ describe("Given a LoginForm component", () => {
       const errorMessage = screen.getByText(expectedErrorMessage);
 
       expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user submits the form with email 'mock@user.com' and password 'safepassword123'", () => {
+    const renderComponent = async () => {
+      const store = { dispatch: jest.fn() };
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [
+          { provide: UserService, useValue: new MockUserService() },
+          HttpClient,
+          { provide: Store, useValue: store },
+        ],
+      });
+      return { store };
+    };
+
+    test("Then its 'login' method should be invoked", async () => {
+      const userCredentials: UserCredentials = {
+        email: "mock@user.com",
+        password: "safepassword123",
+      };
+      const loginAction = {
+        type: "[User] Login User",
+        payload: {
+          email: "mock@user.com",
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJtb2NrQHVzZXIuY29tIiwiaWF0IjoxNTE2MjM5MDIyfQ.YPuy12VqswmM868VyJGPrrNSUWfyTC7GldVz2gLx9vU",
+        },
+      };
+
+      const { store } = await renderComponent();
+      const emailInput = screen.getByLabelText("Email");
+      const passwordInput = screen.getByLabelText("Password");
+      const submitButton = screen.getByRole("button", { name: "Log in" });
+
+      await userEvent.type(emailInput, userCredentials.email);
+      await userEvent.type(passwordInput, userCredentials.password);
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(store.dispatch).toHaveBeenCalledWith(loginAction);
+      });
     });
   });
 });
