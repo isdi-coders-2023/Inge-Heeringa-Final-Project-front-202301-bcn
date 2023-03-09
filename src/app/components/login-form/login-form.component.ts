@@ -1,5 +1,10 @@
+import decode from "jwt-decode";
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { UserService } from "../../services/user.service";
+import { CustomTokenPayload, UserCredentials } from "../../types";
+import { Store } from "@ngrx/store";
+import { loginUser } from "../../store/user/actions/user.actions";
 
 @Component({
   selector: "app-login-form",
@@ -22,10 +27,28 @@ export class LoginFormComponent {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly userService: UserService,
+    private readonly store: Store
+  ) {}
+
+  onSubmit() {
+    const userCredentials = this.loginForm.value as UserCredentials;
+
+    this.userService.login(userCredentials).subscribe(async (data) => {
+      const { token } = data;
+
+      const { email } = decode(token) as CustomTokenPayload;
+
+      localStorage.setItem("token", token);
+
+      this.store.dispatch(loginUser({ payload: { email, token } }));
+    });
+  }
 
   getErrorMessageEmail() {
-    const emailControl = this.loginForm.controls["email"];
+    const emailControl = this.loginForm.controls.email;
 
     if (emailControl.hasError("required")) {
       return "You must enter an email address";
@@ -39,7 +62,7 @@ export class LoginFormComponent {
   }
 
   getErrorMessagePassword() {
-    const passwordControl = this.loginForm.controls["password"];
+    const passwordControl = this.loginForm.controls.password;
 
     if (passwordControl.hasError("required")) {
       return "You must enter a password";

@@ -1,5 +1,8 @@
-import { defaultAction, loginUser } from "../actions/user.actions";
+import { createAction } from "@ngrx/store";
+import { loginUser } from "../actions/user.actions";
 import { reducer } from "./user.reducer";
+
+const defaultAction = createAction("default");
 
 describe("Given a User Reducer function", () => {
   describe("When it receives a user with a negative isLogged status and a Login User action", () => {

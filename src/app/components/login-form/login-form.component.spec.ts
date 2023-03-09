@@ -3,20 +3,19 @@ import userEvent from "@testing-library/user-event";
 import { MatInputModule } from "@angular/material/input";
 import "@testing-library/jest-dom";
 import { LoginFormComponent } from "./login-form.component";
-import { TestBed } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
-
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    imports: [MatInputModule, ReactiveFormsModule],
-    declarations: [LoginFormComponent],
-  }).compileComponents();
-});
+import { UserService } from "../../services/user.service";
+import { HttpClient } from "@angular/common/http";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { provideMockStore } from "@ngrx/store/testing";
 
 describe("Given a LoginForm component", () => {
   describe("When rendered", () => {
     test("Then it should show a form", async () => {
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const form = screen.getByRole("form");
 
@@ -26,7 +25,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show the title 'Log in' in a heading", async () => {
       const title = /log in/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const loginTitle = screen.getByRole("heading", { name: title });
 
@@ -36,7 +38,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show an input field for an email address", async () => {
       const labelText = "Email";
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const emailInput = screen.getByLabelText(labelText);
 
@@ -46,7 +51,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show an input field for a password", async () => {
       const labelText = "Password";
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const passwordInput = screen.getByLabelText(labelText);
 
@@ -56,7 +64,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show a submit button with the text 'Log in'", async () => {
       const buttonText = "Log in";
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const submitButton = screen.getByRole("button", { name: buttonText });
 
@@ -66,7 +77,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show a redirect link to the register page", async () => {
       const linkText = /not a member yet\? sign up/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const redirectLink = screen.getByRole("link", { name: linkText });
 
@@ -76,7 +90,10 @@ describe("Given a LoginForm component", () => {
 
   describe("When the user enters an email with a correct format", () => {
     test("Then it should not show any validation errors", async () => {
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const emailInput = screen.getByLabelText("Email");
 
@@ -92,7 +109,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show the validation error 'Not a valid email'", async () => {
       const expectedErrorMessage = /not a valid email/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const emailInput = screen.getByLabelText("Email");
 
@@ -110,7 +130,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show the validation error 'You must enter an email address'", async () => {
       const expectedErrorMessage = /you must enter an email address/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const emailInput = screen.getByLabelText("Email");
 
@@ -126,7 +149,10 @@ describe("Given a LoginForm component", () => {
 
   describe("When the user enters a password between 8 and 20 characters", () => {
     test("Then it should not show any validation errors", async () => {
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const passwordInput = screen.getByLabelText("Password");
 
@@ -143,7 +169,10 @@ describe("Given a LoginForm component", () => {
       const expectedErrorMessage =
         /password must be at least 8 characters long/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const passwordInput = screen.getByLabelText("Password");
 
@@ -161,7 +190,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show the validation error 'Maximum password length is 20 characters'", async () => {
       const expectedErrorMessage = /maximum password length is 20 characters/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const passwordInput = screen.getByLabelText("Password");
 
@@ -179,7 +211,10 @@ describe("Given a LoginForm component", () => {
     test("Then it should show the validation error 'You must enter a password address'", async () => {
       const expectedErrorMessage = /you must enter a password/i;
 
-      await render(LoginFormComponent);
+      await render(LoginFormComponent, {
+        imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+        providers: [UserService, HttpClient, provideMockStore()],
+      });
 
       const passwordInput = screen.getByLabelText("Password");
 

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import { UserModule } from "./store/user/user.module";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { MaterialModule } from "./material/material.module";
@@ -21,9 +22,10 @@ import { MaterialModule } from "./material/material.module";
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
+    MaterialModule,
     UserModule,
     ReactiveFormsModule,
-    MaterialModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
