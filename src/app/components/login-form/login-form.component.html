@@ -1,4 +1,3 @@
-<h1 class="title title--login">Log in</h1>
 <form class="login-form" role="form" [formGroup]="loginForm" autocomplete="off" (ngSubmit)="onSubmit()">
   <mat-form-field class="login-form__field" appearance="outline" color="accent">
     <mat-label class="login-form__label" for="email" aria-label="email">Email</mat-label>
@@ -19,6 +18,3 @@
   <button mat-flat-button color="accent" class="login-form__submit-button" type="submit"
     [disabled]="loginForm.invalid">Log in</button>
 </form>
-<a href="/" class="register-redirect">Not a member yet? <span class="register-redirect--cta">Sign
-    up</span>
-</a>
