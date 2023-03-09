@@ -1,6 +1,6 @@
 @use "@angular/material" as mat;
-@use "variables";
-@use "palettes";
+@use "partials/variables";
+@use "partials/palettes";
 
 @include mat.core();
 
