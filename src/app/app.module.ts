@@ -10,9 +10,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { UserModule } from "./store/user/user.module";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { MaterialModule } from "./material/material.module";
+import { LoginPageComponent } from "./pages/login-page/login-page.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent],
+  declarations: [AppComponent, LoginFormComponent, LoginPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
