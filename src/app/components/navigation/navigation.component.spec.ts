@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { NavigationComponent } from "./navigation.component";
+import { render, screen } from "@testing-library/angular";
+import "@testing-library/jest-dom";
 
-describe("NavigationComponent", () => {
-  let component: NavigationComponent;
-  let fixture: ComponentFixture<NavigationComponent>;
+describe("Given a Navigation component", () => {
+  describe("When rendered", () => {
+    test("Then it should show a link to 'Home'", async () => {
+      await render(NavigationComponent);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [NavigationComponent],
-    }).compileComponents();
+      const link = screen.getByRole("link", { name: /home/i });
 
-    fixture = TestBed.createComponent(NavigationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it("should create", () => {
-    expect(component).toBeTruthy();
+      expect(link).toBeInTheDocument();
+    });
   });
 });
