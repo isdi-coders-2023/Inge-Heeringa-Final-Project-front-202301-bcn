@@ -11,9 +11,15 @@ import { UserModule } from "./store/user/user.module";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { MaterialModule } from "./material/material.module";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
+import { NavigationComponent } from "./components/navigation/navigation.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, LoginPageComponent],
+  declarations: [
+    AppComponent,
+    LoginFormComponent,
+    LoginPageComponent,
+    NavigationComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
