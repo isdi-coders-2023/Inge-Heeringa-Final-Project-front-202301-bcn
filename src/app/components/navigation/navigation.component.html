@@ -1,5 +1,10 @@
-<nav>
-  <a href="">Sign up</a>
-  <a href=""><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon></a>
-  <a href="users/login">Log in</a>
+<nav class="navigation">
+  <ul>
+    <li><a class="navigation__link" routerLink="/" routerLinkActive="navigation__link--active"
+        [routerLinkActiveOptions]="{exact:
+            true}">
+        <span class="navigation-text">Home</span>
+        <mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="home" class="navigation-icon"></mat-icon></a>
+    </li>
+  </ul>
 </nav>
