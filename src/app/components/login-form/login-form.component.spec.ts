@@ -4,7 +4,7 @@ import { MatInputModule } from "@angular/material/input";
 import "@testing-library/jest-dom";
 import { LoginFormComponent } from "./login-form.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { UserService } from "../../services/user.service";
+import { UserService } from "../../services/user/user.service";
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { Store } from "@ngrx/store";

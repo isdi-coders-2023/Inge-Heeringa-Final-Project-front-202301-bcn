@@ -4,10 +4,10 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../environments/environment";
 import { catchError, throwError, type Observable } from "rxjs";
-import { User, UserCredentials } from "../store/user/types";
-import { UiService } from "./ui.service";
+import { User, UserCredentials } from "../../store/user/types";
+import { UiService } from "../ui/ui.service";
 
 @Injectable({
   providedIn: "root",
@@ -24,6 +24,10 @@ export class UserService {
     private readonly uiService: UiService
   ) {}
 
+  public get userEndpoint(): string {
+    return this.userUrl;
+  }
+
   login(userCredentials: UserCredentials): Observable<User> {
     return this.http
       .post<User>(this.userUrl, userCredentials, this.httpOptions)
@@ -35,7 +39,7 @@ export class UserService {
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
-    if (error.error.error) {
+    if (error.error?.error) {
       uiService.showErrorModal(error.error.error as string);
       return throwError(() => error);
     }

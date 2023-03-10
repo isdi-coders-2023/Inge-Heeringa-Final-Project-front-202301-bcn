@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { showModal } from "../store/ui/actions/ui.actions";
-import { SnackBarService } from "./snackbar.service";
+import { showModal } from "../../store/ui/actions/ui.actions";
+import { SnackBarService } from "../snackbar/snackbar.service";
 
 @Injectable({
   providedIn: "root",
