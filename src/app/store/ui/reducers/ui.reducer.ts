@@ -4,7 +4,7 @@ import { showModal } from "../actions/ui.actions";
 import { UiState } from "../types";
 
 export const initialState: UiState = {
-  modalMessage: "test",
+  modalMessage: "",
   isError: false,
 };
 
