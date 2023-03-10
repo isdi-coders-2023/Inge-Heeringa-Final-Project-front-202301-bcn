@@ -14,6 +14,7 @@ import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+import { UiModule } from "./store/ui/ui.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
     UserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    UiModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
