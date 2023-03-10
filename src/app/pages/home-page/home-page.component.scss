@@ -1,0 +1,88 @@
+@use "../../../styles//partials/variables";
+
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(0deg, rgb(0, 0, 0, 0.8) 100%, rgb(0, 0, 0.8) 100%),
+    url("../../../assets/images/hero-background.webp");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+
+  &__logo {
+    width: 300px;
+    height: fit-content;
+  }
+
+  &__slogan {
+    color: variables.$secondary-color;
+    font-size: 1.3rem;
+    font-family: variables.$display-font;
+    text-align: center;
+  }
+
+  &__cta {
+    font-family: variables.$display-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get(variables.$accent-color, "main");
+    background-color: transparent;
+    border: 2px solid map-get(variables.$accent-color, "main");
+    width: 104px;
+    height: 41px;
+    font-size: 20px;
+    border-radius: 20px;
+    transition: 0.2s;
+
+    &:hover {
+      color: map-get(variables.$primary-color, "main");
+      background-color: map-get(variables.$accent-color, "main");
+      border: 2px solid map-get(variables.$accent-color, "main");
+    }
+  }
+}
+
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    &__slogan {
+      font-size: 30px;
+    }
+
+    &__logo {
+      width: 450px;
+    }
+
+    &__cta {
+      font-size: 30px;
+      width: 150px;
+      height: 52px;
+      border-radius: 40px;
+    }
+  }
+}
+
+// &--active {
+//         background-color: transparent;
+//         color: map-get(variables.$primary-color, "main");
+//         color: variables.$secondary-color;
+//         background-color: map-get(variables.$primary-color, "main");
+//       }
+//     }

@@ -12,6 +12,8 @@ import { LoginFormComponent } from "./components/login-form/login-form.component
 import { MaterialModule } from "./material/material.module";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
+import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { NavigationComponent } from "./components/navigation/navigation.componen
     LoginFormComponent,
     LoginPageComponent,
     NavigationComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { NavigationComponent } from "./components/navigation/navigation.componen
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
