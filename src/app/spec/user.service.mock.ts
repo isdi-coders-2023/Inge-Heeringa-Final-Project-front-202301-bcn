@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { User, UserCredentials } from "../types";
+import { User, UserCredentials } from "../store/user/types";
 
 @Injectable()
 export class MockUserService {

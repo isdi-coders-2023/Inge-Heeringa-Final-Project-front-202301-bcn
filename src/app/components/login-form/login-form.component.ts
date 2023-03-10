@@ -2,9 +2,10 @@ import decode from "jwt-decode";
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from "../../services/user.service";
-import { CustomTokenPayload, UserCredentials } from "../../types";
+import { CustomTokenPayload } from "../../types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/actions/user.actions";
+import { UserCredentials } from "../../store/user/types";
 
 @Component({
   selector: "app-login-form",

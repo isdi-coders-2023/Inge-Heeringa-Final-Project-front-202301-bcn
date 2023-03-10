@@ -7,16 +7,22 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { UserCredentials } from "../../types";
 import { Store } from "@ngrx/store";
 import { MockUserService } from "../../spec/user.service.mock";
 import { loginUser } from "../../store/user/actions/user.actions";
 import { createMockStore } from "../../spec/mockStore";
+import { UserCredentials } from "../../store/user/types";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const renderComponent = async () => {
   const store = createMockStore();
   await render(LoginFormComponent, {
-    imports: [MatInputModule, ReactiveFormsModule, HttpClientTestingModule],
+    imports: [
+      MatInputModule,
+      ReactiveFormsModule,
+      HttpClientTestingModule,
+      MatSnackBarModule,
+    ],
     providers: [
       { provide: UserService, useValue: new MockUserService() },
       HttpClient,
