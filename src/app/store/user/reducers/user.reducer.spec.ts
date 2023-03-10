@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
 import { loginUser } from "../actions/user.actions";
+import { User, UserState } from "../types";
 import { reducer } from "./user.reducer";
 
 const defaultAction = createAction("default");
@@ -7,16 +8,16 @@ const defaultAction = createAction("default");
 describe("Given a User Reducer function", () => {
   describe("When it receives a user with a negative isLogged status and a Login User action", () => {
     test("Then it should return a user with email 'mock@user.com', a token '123' and a positive isLogged status", () => {
-      const currentUserState = {
+      const currentUserState: UserState = {
         email: "",
         token: "",
         isLogged: true,
       };
-      const user = {
+      const user: User = {
         email: "mock@user.com",
         token: "123",
       };
-      const expectedUserState = {
+      const expectedUserState: UserState = {
         email: "mock@user.com",
         token: "123",
         isLogged: true,

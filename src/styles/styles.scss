@@ -16,7 +16,6 @@ body {
   font-size: 1.25rem;
   color: map-get(variables.$accent-color, "main");
   background-color: map-get(variables.$primary-color, "main");
-  min-height: 100vh;
 }
 
 h1,
