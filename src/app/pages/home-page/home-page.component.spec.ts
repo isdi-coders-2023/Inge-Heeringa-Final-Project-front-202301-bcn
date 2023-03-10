@@ -1,22 +1,37 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { render, screen } from "@testing-library/angular";
+import "@testing-library/jest-dom";
 import { HomePageComponent } from "./home-page.component";
 
-describe("HomePageComponent", () => {
-  let component: HomePageComponent;
-  let fixture: ComponentFixture<HomePageComponent>;
+describe("Given a HomePageComponent", () => {
+  describe("When rendered", () => {
+    test("Then it should show the 'peer2peer' logo", async () => {
+      const altText = /peer2peer logo/i;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomePageComponent],
-    }).compileComponents();
+      await render(HomePageComponent);
 
-    fixture = TestBed.createComponent(HomePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      const logo = screen.getByRole("img", { name: altText });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+      expect(logo).toBeInTheDocument();
+    });
+
+    test("Then it should show a call to action to sign up", async () => {
+      const ctaText = /sign up/i;
+
+      await render(HomePageComponent);
+
+      const logo = screen.getByRole("link", { name: ctaText });
+
+      expect(logo).toBeInTheDocument();
+    });
+
+    test("Then it should show a call to action to log in", async () => {
+      const ctaText = /log in/i;
+
+      await render(HomePageComponent);
+
+      const logo = screen.getByRole("link", { name: ctaText });
+
+      expect(logo).toBeInTheDocument();
+    });
   });
 });

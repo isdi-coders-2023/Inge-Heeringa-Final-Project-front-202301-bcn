@@ -13,6 +13,7 @@ import { MaterialModule } from "./material/material.module";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { HomePageComponent } from "./pages/home-page/home-page.component";
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
