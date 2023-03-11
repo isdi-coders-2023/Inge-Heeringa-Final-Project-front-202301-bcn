@@ -8,7 +8,7 @@ import { environment } from "../../../environments/environment";
 import { catchError, throwError, type Observable } from "rxjs";
 import { User, UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
-import { loginUser, logoutUser } from "../../store/user/user.actions";
+import { logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
 
 @Injectable({
