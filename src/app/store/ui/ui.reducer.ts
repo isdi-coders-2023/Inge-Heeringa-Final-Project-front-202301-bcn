@@ -45,4 +45,5 @@ export const {
   selectUiState,
   selectModalMessage,
   selectIsError,
+  selectIsLoading,
 } = uiFeature;

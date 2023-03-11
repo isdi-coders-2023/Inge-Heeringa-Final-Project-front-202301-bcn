@@ -6,7 +6,7 @@ import { CustomTokenPayload } from "../../types";
 import { UserCredentials } from "../../store/user/types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/user.actions";
-import { UiService } from "src/app/services/ui/ui.service";
+import { UiService } from "../../services/ui/ui.service";
 
 @Component({
   selector: "app-login-form",
