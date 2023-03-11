@@ -6,8 +6,6 @@ import { CustomTokenPayload } from "../../types";
 import { UserCredentials } from "../../store/user/types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/user.actions";
-import { selectIsLogged } from "../../store/user/user.reducer";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "app-login-form",
