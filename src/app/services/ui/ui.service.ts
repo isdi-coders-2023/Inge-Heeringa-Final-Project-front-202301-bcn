@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { showModal } from "../../store/ui/ui.actions";
+import { hideLoading, showLoading, showModal } from "../../store/ui/ui.actions";
 import { SnackBarService } from "../snackbar/snackbar.service";
 
 @Injectable({
@@ -20,5 +20,13 @@ export class UiService {
       })
     );
     this.snackbarService.openSnackBar(errorMessage, "error");
+  }
+
+  showLoading() {
+    this.store.dispatch(showLoading());
+  }
+
+  hideLoading() {
+    this.store.dispatch(hideLoading());
   }
 }

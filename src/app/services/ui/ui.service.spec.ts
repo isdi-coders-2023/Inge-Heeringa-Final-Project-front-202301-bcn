@@ -12,6 +12,7 @@ let uiService: UiService;
 let store: MockStore;
 let snackBarService: SnackBarService;
 const initialState: UiState = {
+  isLoading: false,
   modalMessage: "",
   isError: false,
 };
