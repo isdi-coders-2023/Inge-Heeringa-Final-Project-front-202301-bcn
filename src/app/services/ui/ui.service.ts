@@ -19,6 +19,6 @@ export class UiService {
         payload: { isError: true, modalMessage: errorMessage },
       })
     );
-    this.snackbarService.openSnackBar(errorMessage);
+    this.snackbarService.openSnackBar(errorMessage, "error");
   }
 }

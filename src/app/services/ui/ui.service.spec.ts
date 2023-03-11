@@ -45,12 +45,16 @@ describe("Given a Ui Service", () => {
       );
     });
 
-    test("Then it should invoke the openSnackBar method of the SnackBar Service", () => {
+    test("Then it should invoke the openSnackBar method of the SnackBar Service with an error message and a custom class 'error'", () => {
       const errorMessage = "Login failed";
+      const customClass = "error";
 
       uiService.showErrorModal(errorMessage);
 
-      expect(snackBarService.openSnackBar).toHaveBeenCalledWith(errorMessage);
+      expect(snackBarService.openSnackBar).toHaveBeenCalledWith(
+        errorMessage,
+        customClass
+      );
     });
   });
 });
