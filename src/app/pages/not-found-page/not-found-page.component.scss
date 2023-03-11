@@ -1,0 +1,31 @@
+@use "../../../styles/partials/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+  font-size: 3rem;
+  text-align: center;
+
+  &__text {
+    font-family: variables.$display-font;
+  }
+
+  &__sad {
+    font-weight: 900;
+  }
+
+  &__button {
+    margin-top: 20px;
+  }
+}
