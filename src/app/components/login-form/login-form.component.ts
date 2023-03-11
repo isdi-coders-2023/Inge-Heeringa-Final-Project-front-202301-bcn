@@ -6,7 +6,7 @@ import { CustomTokenPayload } from "../../types";
 import { UserCredentials } from "../../store/user/types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/user.actions";
-import { selectIsLogged } from "src/app/store/user/user.reducer";
+import { selectIsLogged } from "../../store/user/user.reducer";
 import { Observable } from "rxjs";
 
 @Component({
@@ -15,7 +15,6 @@ import { Observable } from "rxjs";
   styleUrls: ["./login-form.component.scss"],
 })
 export class LoginFormComponent {
-  isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
   loginForm = this.fb.group({
     email: [
       "",
