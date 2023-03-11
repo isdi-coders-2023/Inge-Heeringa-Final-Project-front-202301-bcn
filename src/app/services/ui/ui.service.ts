@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { showModal } from "../../store/ui/actions/ui.actions";
+import { showModal } from "../../store/ui/ui.actions";
 import { SnackBarService } from "../snackbar/snackbar.service";
 
 @Injectable({

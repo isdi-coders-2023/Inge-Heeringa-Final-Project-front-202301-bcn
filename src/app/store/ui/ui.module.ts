@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
-import { uiFeature } from "./reducers/ui.reducer";
+import { uiFeature } from "./ui.reducer";
 
 @NgModule({
   imports: [StoreModule.forFeature(uiFeature)],

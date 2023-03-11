@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { SnackBarService } from "../snackbar/snackbar.service";
 import { UiService } from "./ui.service";
-import { showModal } from "../../store/ui/actions/ui.actions";
+import { showModal } from "../../store/ui/ui.actions";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UiState } from "../../store/ui/types";

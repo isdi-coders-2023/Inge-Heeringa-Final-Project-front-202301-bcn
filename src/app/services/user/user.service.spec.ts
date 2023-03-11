@@ -11,7 +11,7 @@ import { Store } from "@ngrx/store";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-describe("UserService", () => {
+describe("Given a User Service", () => {
   let userService: UserService;
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
@@ -44,38 +44,47 @@ describe("UserService", () => {
     httpMock.verify();
   });
 
-  it("should make a POST request to the login endpoint", () => {
-    const credentials = { email: "test@example.com", password: "password123" };
-    const mockResponse = { token: "mockToken" };
+  describe("When its getToken method is invoked with credentials 'test@example.com' and password 'password123'", () => {
+    test("Then it should make a POST request to the login endpoint", () => {
+      const credentials = {
+        email: "test@example.com",
+        password: "password123",
+      };
+      const mockResponse = { token: "mockToken" };
 
-    userService.login(credentials).subscribe((response) => {
-      expect(response).toEqual(mockResponse);
+      userService.login(credentials).subscribe((response) => {
+        expect(response).toEqual(mockResponse);
+      });
+
+      const req = httpMock.expectOne(`${userService.userEndpoint}`);
+      expect(req.request.method).toEqual("POST");
+      expect(req.request.body).toEqual(credentials);
+
+      req.flush(mockResponse);
     });
-
-    const req = httpMock.expectOne(`${userService.userEndpoint}`);
-    expect(req.request.method).toEqual("POST");
-    expect(req.request.body).toEqual(credentials);
-
-    req.flush(mockResponse);
   });
 
-  it("should call showErrorModal when a HttpErrorResponse with an error field is thrown", () => {
-    const mockError = { error: { error: "mockError" } };
-    const spy = jest.spyOn(uiService, "showErrorModal");
+  describe("When its getToken method is invoked and an HttpErrorResponse with an error field is thrown", () => {
+    test("Then it should call the showErrorModal method of the uiService", () => {
+      const mockError = { error: { error: "mockError" } };
+      const spy = jest.spyOn(uiService, "showErrorModal");
 
-    userService.handleError(mockError as HttpErrorResponse, uiService);
-    expect(spy).toHaveBeenCalledWith(mockError.error.error);
+      userService.handleError(mockError as HttpErrorResponse, uiService);
+      expect(spy).toHaveBeenCalledWith(mockError.error.error);
 
-    spy.mockRestore();
+      spy.mockRestore();
+    });
   });
 
-  it("should call showErrorModal when a HttpErrorResponse with a message field is thrown", () => {
-    const mockError = { error: "error", message: "mockError" };
-    const spy = jest.spyOn(uiService, "showErrorModal");
+  describe("When its getToken method is invoked and an HttpErrorResponse with a message field is thrown", () => {
+    test("Then it should call the showErrorModal method of the uiService", () => {
+      const mockError = { error: "error", message: "mockError" };
+      const spy = jest.spyOn(uiService, "showErrorModal");
 
-    userService.handleError(mockError as HttpErrorResponse, uiService);
-    expect(spy).toHaveBeenCalledWith(mockError.message);
+      userService.handleError(mockError as HttpErrorResponse, uiService);
+      expect(spy).toHaveBeenCalledWith(mockError.message);
 
-    spy.mockRestore();
+      spy.mockRestore();
+    });
   });
 });
