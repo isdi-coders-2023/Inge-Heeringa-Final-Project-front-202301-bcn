@@ -1,22 +1,16 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { render, screen } from "@testing-library/angular";
+import "@testing-library/jest-dom";
 
 import { LoadingComponent } from "./loading.component";
 
-describe("LoadingComponent", () => {
-  let component: LoadingComponent;
-  let fixture: ComponentFixture<LoadingComponent>;
+describe("Given a LoadingComponent", () => {
+  describe("When rendered", () => {
+    test("Then it should show a loading screen as the main content", async () => {
+      await render(LoadingComponent);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [LoadingComponent],
-    }).compileComponents();
+      const loadingScreen = screen.getByRole("main");
 
-    fixture = TestBed.createComponent(LoadingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it("should create", () => {
-    expect(component).toBeTruthy();
+      expect(loadingScreen).toBeInTheDocument();
+    });
   });
 });
