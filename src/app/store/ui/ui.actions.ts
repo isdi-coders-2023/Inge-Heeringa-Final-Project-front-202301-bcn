@@ -1,7 +1,11 @@
 import { createAction, props } from "@ngrx/store";
-import { UiState } from "./types";
+import { Modal } from "./types";
 
 export const showModal = createAction(
   "[Ui] Show Modal",
-  props<{ payload: UiState }>()
+  props<{ payload: Modal }>()
 );
+
+export const showLoading = createAction("[Ui] Show Loading");
+
+export const hideLoading = createAction("[Ui] Hide Loading");

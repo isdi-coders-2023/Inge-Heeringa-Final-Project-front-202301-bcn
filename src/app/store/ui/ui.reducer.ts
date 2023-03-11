@@ -1,9 +1,10 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
-import { showModal } from "./ui.actions";
+import { hideLoading, showLoading, showModal } from "./ui.actions";
 import { UiState } from "./types";
 
 export const initialState: UiState = {
+  isLoading: false,
   modalMessage: "",
   isError: false,
 };
@@ -12,10 +13,29 @@ export const uiFeature = createFeature({
   name: "ui",
   reducer: createReducer(
     initialState,
-    on(showModal, (currentState, { payload }) => ({
-      ...currentState,
-      ...payload,
-    }))
+    on(
+      showModal,
+      (currentState, { payload }): UiState => ({
+        ...currentState,
+        ...payload,
+      })
+    ),
+
+    on(
+      showLoading,
+      (currentState): UiState => ({
+        ...currentState,
+        isLoading: true,
+      })
+    ),
+
+    on(
+      hideLoading,
+      (currentState): UiState => ({
+        ...currentState,
+        isLoading: false,
+      })
+    )
   ),
 });
 
@@ -25,4 +45,5 @@ export const {
   selectUiState,
   selectModalMessage,
   selectIsError,
+  selectIsLoading,
 } = uiFeature;

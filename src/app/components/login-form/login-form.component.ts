@@ -6,8 +6,7 @@ import { CustomTokenPayload } from "../../types";
 import { UserCredentials } from "../../store/user/types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/user.actions";
-import { selectIsLogged } from "../../store/user/user.reducer";
-import { Observable } from "rxjs";
+import { UiService } from "../../services/ui/ui.service";
 
 @Component({
   selector: "app-login-form",
@@ -33,10 +32,13 @@ export class LoginFormComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly uiService: UiService
   ) {}
 
   onSubmit() {
+    this.uiService.showLoading();
+
     const userCredentials = this.loginForm.value as UserCredentials;
 
     this.userService.login(userCredentials).subscribe(async (data) => {
@@ -47,6 +49,7 @@ export class LoginFormComponent {
       localStorage.setItem("token", token);
 
       this.store.dispatch(loginUser({ payload: { email, token } }));
+      this.uiService.hideLoading();
     });
   }
 }
