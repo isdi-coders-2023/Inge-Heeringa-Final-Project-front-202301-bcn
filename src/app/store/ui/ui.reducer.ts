@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
-import { showModal } from "../actions/ui.actions";
-import { UiState } from "../types";
+import { showModal } from "./ui.actions";
+import { UiState } from "./types";
 
 export const initialState: UiState = {
   modalMessage: "",

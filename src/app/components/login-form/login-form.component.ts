@@ -3,9 +3,9 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from "../../services/user/user.service";
 import { CustomTokenPayload } from "../../types";
-import { Store } from "@ngrx/store";
-import { loginUser } from "../../store/user/actions/user.actions";
 import { UserCredentials } from "../../store/user/types";
+import { Store } from "@ngrx/store";
+import { loginUser } from "../../store/user/user.actions";
 
 @Component({
   selector: "app-login-form",

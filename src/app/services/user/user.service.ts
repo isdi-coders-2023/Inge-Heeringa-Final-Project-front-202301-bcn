@@ -8,6 +8,8 @@ import { environment } from "../../../environments/environment";
 import { catchError, throwError, type Observable } from "rxjs";
 import { User, UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
+import { logoutUser } from "../../store/user/user.actions";
+import { Store } from "@ngrx/store";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +23,8 @@ export class UserService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly uiService: UiService
+    private readonly uiService: UiService,
+    private readonly store: Store
   ) {}
 
   public get userEndpoint(): string {
@@ -36,6 +39,10 @@ export class UserService {
           this.handleError(error as HttpErrorResponse, this.uiService)
         )
       );
+  }
+
+  logout() {
+    this.store.dispatch(logoutUser());
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {

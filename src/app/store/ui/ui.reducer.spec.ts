@@ -1,6 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { showModal } from "../actions/ui.actions";
-import { UiState } from "../types";
+import { showModal } from "./ui.actions";
+import { UiState } from "./types";
 import { reducer } from "./ui.reducer";
 
 const defaultAction = createAction("default");
