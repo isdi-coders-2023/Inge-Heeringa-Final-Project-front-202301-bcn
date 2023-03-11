@@ -43,6 +43,7 @@ export class UserService {
 
   logout() {
     this.store.dispatch(logoutUser());
+    localStorage.removeItem("token");
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
