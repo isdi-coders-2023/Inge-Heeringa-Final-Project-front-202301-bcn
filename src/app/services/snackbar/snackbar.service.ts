@@ -12,9 +12,10 @@ export class SnackBarService {
 
   constructor(private readonly snackBar: MatSnackBar) {}
 
-  openSnackBar(message: string) {
+  openSnackBar(message: string, customClass: string) {
     this.snackBar.open(message, "Close", {
       verticalPosition: this.verticalPosition,
+      panelClass: customClass,
     });
   }
 }

@@ -56,3 +56,22 @@ a:visited {
   align-self: flex-start;
   font-size: 3rem;
 }
+
+.mat-mdc-snack-bar-container {
+  &.error {
+    --mdc-snackbar-container-color: #920000;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+
+  &.success {
+    --mdc-snackbar-container-color: #027100;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    position: absolute !important;
+    bottom: 0 !important;
+  }
+}

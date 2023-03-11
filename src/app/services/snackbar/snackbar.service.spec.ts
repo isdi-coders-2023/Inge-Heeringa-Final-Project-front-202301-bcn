@@ -23,14 +23,16 @@ describe("Given a SnackBar Service", () => {
     snackBarService = TestBed.inject(SnackBarService);
   });
 
-  describe("When its method openSnackBar is called with a message and an action", () => {
+  describe("When its method openSnackBar is called with a message, an error custom class and an action", () => {
     test("Then it should invoke the 'open' method of the received SnackBar", () => {
       const message = "Test message";
+      const customClass = "error";
       const expectedOptions = {
         verticalPosition: snackBarService.verticalPosition,
+        panelClass: customClass,
       };
 
-      snackBarService.openSnackBar(message);
+      snackBarService.openSnackBar(message, customClass);
 
       expect(snackBarMock.open).toHaveBeenCalledWith(
         message,
