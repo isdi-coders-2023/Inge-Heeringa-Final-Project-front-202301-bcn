@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { UserService } from "src/app/services/user/user.service";
-import { selectIsLogged } from "src/app/store/user/user.reducer";
+import { UserService } from "../../services/user/user.service";
+import { selectIsLogged } from "../../store/user/user.reducer";
 
 @Component({
   selector: "app-home-page",
@@ -12,10 +12,7 @@ import { selectIsLogged } from "src/app/store/user/user.reducer";
 export class HomePageComponent {
   isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
 
-  constructor(
-    private readonly store: Store,
-    private readonly userService: UserService
-  ) {}
+  constructor(public store: Store, private readonly userService: UserService) {}
 
   logoutUser() {
     this.userService.logout();
