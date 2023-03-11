@@ -1,5 +1,5 @@
 import { createAction } from "@ngrx/store";
-import { loginUser } from "../actions/user.actions";
+import { loginUser, logoutUser } from "../actions/user.actions";
 import { User, UserState } from "../types";
 import { reducer } from "./user.reducer";
 
@@ -46,6 +46,27 @@ describe("Given a User Reducer function", () => {
       const invalidAction = defaultAction;
 
       const newUserState = reducer(currentUserState, invalidAction);
+
+      expect(newUserState).toStrictEqual(expectedUserState);
+    });
+  });
+
+  describe("When it receives a logged user and Logout user action", () => {
+    test("Then it should return a user state with an empty email address, an empty token and a negative isLogged status", () => {
+      const currentUserState = {
+        email: "",
+        token: "",
+        isLogged: true,
+      };
+      const expectedUserState = {
+        email: "",
+        token: "",
+        isLogged: false,
+      };
+
+      const action = logoutUser;
+
+      const newUserState = reducer(currentUserState, action);
 
       expect(newUserState).toStrictEqual(expectedUserState);
     });
