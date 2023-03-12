@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import {
   MatSnackBar,
-  MatSnackBarVerticalPosition,
+  type MatSnackBarVerticalPosition,
 } from "@angular/material/snack-bar";
 
 @Injectable({
@@ -10,7 +10,7 @@ import {
 export class SnackBarService {
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
-  constructor(private readonly snackBar: MatSnackBar) {}
+  constructor(@Inject(MatSnackBar) private readonly snackBar: MatSnackBar) {}
 
   openSnackBar(message: string, customClass: string) {
     this.snackBar.open(message, "Close", {

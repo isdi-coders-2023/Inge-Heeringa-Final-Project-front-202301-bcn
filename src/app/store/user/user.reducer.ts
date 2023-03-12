@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { UserState } from "./types";
+import { type UserState } from "./types";
 import { loginUser, logoutUser } from "./user.actions";
 
 export const initialState: UserState = {

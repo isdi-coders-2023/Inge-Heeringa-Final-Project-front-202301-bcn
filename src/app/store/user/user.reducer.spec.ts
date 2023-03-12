@@ -1,6 +1,6 @@
 import { createAction } from "@ngrx/store";
 import { loginUser, logoutUser } from "./user.actions";
-import { User, UserState } from "./types";
+import { type User, type UserState } from "./types";
 import { reducer } from "./user.reducer";
 
 const defaultAction = createAction("default");

@@ -1,12 +1,13 @@
 import decode from "jwt-decode";
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from "../../services/user/user.service";
-import { CustomTokenPayload } from "../../types";
-import { UserCredentials } from "../../store/user/types";
+import { type CustomTokenPayload } from "../../types";
+import { type UserCredentials } from "../../store/user/types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user/user.actions";
 import { UiService } from "../../services/ui/ui.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login-form",
@@ -30,10 +31,10 @@ export class LoginFormComponent {
   });
 
   constructor(
-    private readonly fb: FormBuilder,
-    private readonly userService: UserService,
-    private readonly store: Store,
-    private readonly uiService: UiService
+    @Inject(FormBuilder) private readonly fb: FormBuilder,
+    @Inject(UserService) private readonly userService: UserService,
+    @Inject(UiService) private readonly uiService: UiService,
+    @Inject(Router) public router: Router
   ) {}
 
   onSubmit() {
@@ -41,15 +42,16 @@ export class LoginFormComponent {
 
     const userCredentials = this.loginForm.value as UserCredentials;
 
-    this.userService.login(userCredentials).subscribe(async (data) => {
+    this.userService.getToken(userCredentials).subscribe(async (data) => {
       const { token } = data;
 
       const { email } = decode(token) as CustomTokenPayload;
 
       localStorage.setItem("token", token);
 
-      this.store.dispatch(loginUser({ payload: { email, token } }));
+      this.userService.login({ email, token });
       this.uiService.hideLoading();
+      await this.router.navigate(["/"]);
     });
   }
 }

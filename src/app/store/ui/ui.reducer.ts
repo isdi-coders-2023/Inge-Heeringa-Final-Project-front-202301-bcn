@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
 import { hideLoading, showLoading, showModal } from "./ui.actions";
-import { UiState } from "./types";
+import { type UiState } from "./types";
 
 export const initialState: UiState = {
   isLoading: false,

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { type Observable } from "rxjs";
 import { selectIsLoading } from "../../store/ui/ui.reducer";
 import { hideLoading, showLoading, showModal } from "../../store/ui/ui.actions";
 import { SnackBarService } from "../snackbar/snackbar.service";
@@ -10,7 +10,7 @@ import { SnackBarService } from "../snackbar/snackbar.service";
 })
 export class UiService {
   constructor(
-    private readonly store: Store,
+    @Inject(Store) private readonly store: Store,
     @Inject(SnackBarService)
     private readonly snackbarService: SnackBarService
   ) {}

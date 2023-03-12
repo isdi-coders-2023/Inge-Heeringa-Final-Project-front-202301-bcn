@@ -3,7 +3,7 @@ import {
   HttpTestingController,
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, type HttpErrorResponse } from "@angular/common/http";
 import { UserService } from "./user.service";
 import { UiService } from "../ui/ui.service";
 import { createMockStore } from "../../spec/mockStore";
@@ -52,7 +52,7 @@ describe("Given a User Service", () => {
       };
       const mockResponse = { token: "mockToken" };
 
-      userService.login(credentials).subscribe((response) => {
+      userService.getToken(credentials).subscribe((response) => {
         expect(response).toEqual(mockResponse);
       });
 
