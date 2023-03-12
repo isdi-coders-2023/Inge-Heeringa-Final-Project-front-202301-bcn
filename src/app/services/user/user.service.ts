@@ -4,13 +4,14 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
+
 import { catchError, throwError, type Observable } from "rxjs";
 import { User, UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
 import { logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
 import { UserRegisterData, UserRegisterResponse } from "../../types";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",

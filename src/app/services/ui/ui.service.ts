@@ -24,6 +24,15 @@ export class UiService {
     this.snackbarService.openSnackBar(errorMessage, "error");
   }
 
+  showSuccessModal(errorMessage: string) {
+    this.store.dispatch(
+      showModal({
+        payload: { isError: false, modalMessage: errorMessage },
+      })
+    );
+    this.snackbarService.openSnackBar(errorMessage, "success");
+  }
+
   showLoading() {
     this.store.dispatch(showLoading());
   }
