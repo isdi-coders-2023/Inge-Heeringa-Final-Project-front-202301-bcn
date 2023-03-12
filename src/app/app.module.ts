@@ -18,6 +18,7 @@ import { UiModule } from "./store/ui/ui.module";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 import { LoadingComponent } from "./components/loading/loading.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
+import { RegisterPageComponent } from "./pages/register-page/register-page.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegisterFormComponent } from "./components/register-form/register-form.
     NotFoundPageComponent,
     LoadingComponent,
     RegisterFormComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
