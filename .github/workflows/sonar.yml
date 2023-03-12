@@ -15,6 +15,13 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Node Modules
         run: npm ci
+      - name: Environments
+        run: npm run env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          USERS_PATH: ${{ secrets.USERS_PATH }}
+          LOGIN_PATH: ${{ secrets.LOGIN_PATH }}
+          REGISTER_PATH: ${{ secrets.REGISTER_PATH }}
       - name: Coverage
         run: npm run test:coverage
       - name: SonarCloud Scan
@@ -22,3 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          API_URL: ${{ secrets.API_URL }}
+          USERS_PATH: ${{ secrets.USERS_PATH }}
+          LOGIN_PATH: ${{ secrets.LOGIN_PATH }}
+          REGISTER_PATH: ${{ secrets.REGISTER_PATH }}
