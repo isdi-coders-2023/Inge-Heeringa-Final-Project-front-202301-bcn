@@ -1,9 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { selectIsLogged } from "src/app/store/user/user.reducer";
-import { environment } from "../../../environments/environment";
+import { type Observable } from "rxjs";
+import { selectIsLogged } from "../../store/user/user.reducer";
 
 @Component({
   selector: "app-header",
@@ -14,5 +13,8 @@ export class HeaderComponent {
   isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
   urls = ["/", "/users/login", "/users/register"];
 
-  constructor(public store: Store, public router: Router) {}
+  constructor(
+    @Inject(Store) public store: Store,
+    @Inject(Router) public router: Router
+  ) {}
 }

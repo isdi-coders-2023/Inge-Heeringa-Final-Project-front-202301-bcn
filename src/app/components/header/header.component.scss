@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   height: 60px;
-  padding: 0 10px;
+  padding: 0 30px;
 }
 
 .header {
@@ -22,7 +22,7 @@
     width: 80px;
     height: auto;
     position: absolute;
-    left: 10px;
+    left: 30px;
   }
 
   &__cta {
@@ -47,10 +47,6 @@
 }
 
 @media (min-width: 768px) {
-  :host {
-    padding: 0 30px;
-  }
-
   .button-wrapper {
     display: flex;
     align-items: center;
@@ -58,10 +54,6 @@
   }
 
   .header {
-    &__logo {
-      left: 30px;
-    }
-
     &__cta {
       border: 2px solid map-get(variables.$primary-color, "main");
       color: map-get(variables.$primary-color, "main");

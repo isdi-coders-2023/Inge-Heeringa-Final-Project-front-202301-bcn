@@ -75,14 +75,14 @@ describe("Given a HomePageComponent", () => {
       });
     };
 
-    test("Then it should show a call to action to log out", async () => {
-      const ctaText = /log out/i;
+    test("Then it should show a button to log out", async () => {
+      const buttonText = /log out/i;
 
       await renderComponent();
 
-      const cta = screen.getByRole("link", { name: ctaText });
+      const button = screen.getByRole("link", { name: buttonText });
 
-      expect(cta).toBeInTheDocument();
+      expect(button).toBeInTheDocument();
     });
   });
 });
