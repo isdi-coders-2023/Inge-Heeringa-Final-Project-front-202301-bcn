@@ -1,15 +1,15 @@
-<form class="register-form" role="form" autocomplete="off">
+<form class="register-form" role="form" [formGroup]="registerForm" autocomplete="off" novalidate>
   <mat-form-field class="register-form__field" appearance="outline" color="accent">
     <mat-label class="register-form__label" for="username" aria-label="username">Username</mat-label>
-    <input class="register-form__input" type="username" id="username" matInput required>
+    <input class="register-form__input" type="username" id="username" matInput formControlName="username" required>
   </mat-form-field>
   <mat-form-field class="register-form__field" appearance="outline" color="accent">
     <mat-label class="register-form__label" for="email" aria-label="email">Email</mat-label>
-    <input class="register-form__input" type="email" id="email" matInput required>
+    <input class="register-form__input" type="email" id="email" matInput formControlName="email" required>
   </mat-form-field>
   <mat-form-field class="register-form__field" appearance="outline" color="accent">
     <mat-label class="register-form__label" for="password" aria-label="password">Password</mat-label>
-    <input class="register-form__input" type="password" id="password" matInput required>
+    <input class="register-form__input" type="password" id="password" matInput formControlName="password" required>
   </mat-form-field>
   <button mat-flat-button color="accent" class="register-form__submit-button" type="submit">Sign up</button>
 </form>
