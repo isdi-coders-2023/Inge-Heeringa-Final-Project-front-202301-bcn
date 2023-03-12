@@ -9,7 +9,7 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event/";
 import { UserService } from "../../services/user/user.service";
 import { MockUserService } from "../../spec/user.service.mock";
-import { UserRegisterData } from "../../types";
+import { type UserRegisterData } from "../../types";
 import { createMockStore } from "../../spec/mockStore";
 import { RegisterFormComponent } from "./register-form.component";
 

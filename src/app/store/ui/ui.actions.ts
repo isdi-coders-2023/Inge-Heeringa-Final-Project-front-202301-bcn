@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Modal } from "./types";
+import { type Modal } from "./types";
 
 export const showModal = createAction(
   "[Ui] Show Modal",

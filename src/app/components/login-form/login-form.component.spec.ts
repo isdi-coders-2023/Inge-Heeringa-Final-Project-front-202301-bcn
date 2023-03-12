@@ -11,11 +11,13 @@ import { Store } from "@ngrx/store";
 import { MockUserService } from "../../spec/user.service.mock";
 import { loginUser } from "../../store/user/user.actions";
 import { createMockStore } from "../../spec/mockStore";
-import { UserCredentials } from "../../store/user/types";
+import { type UserCredentials } from "../../store/user/types";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { hideLoading, showLoading } from "../../store/ui/ui.actions";
 
 const renderComponent = async () => {
   const store = createMockStore();
+  const userService = new MockUserService();
   await render(LoginFormComponent, {
     imports: [
       MatInputModule,
@@ -24,12 +26,12 @@ const renderComponent = async () => {
       MatSnackBarModule,
     ],
     providers: [
-      { provide: UserService, useValue: new MockUserService() },
       HttpClient,
       { provide: Store, useValue: store },
+      { provide: UserService, useValue: userService },
     ],
   });
-  return { store };
+  return { store, userService };
 };
 
 describe("Given a LoginForm component", () => {
@@ -192,21 +194,15 @@ describe("Given a LoginForm component", () => {
   });
 
   describe("When the user submits the form with the correct credentials email 'mock@user.com' and password 'safepassword123'", () => {
-    test("Then dispatch should be invoked with the Login User action", async () => {
+    test("Then the UserSerive's getToken method should be invoked with the user's credentials", async () => {
       const userCredentials: UserCredentials = {
         email: "mock@user.com",
         password: "safepassword123",
       };
 
-      const loginUserAction = loginUser({
-        payload: {
-          email: "mock@user.com",
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJtb2NrQHVzZXIuY29tIiwiaWF0IjoxNTE2MjM5MDIyfQ.YPuy12VqswmM868VyJGPrrNSUWfyTC7GldVz2gLx9vU",
-        },
-      });
+      const { userService } = await renderComponent();
+      const spy = jest.spyOn(userService, "getToken");
 
-      const { store } = await renderComponent();
       const emailInput = screen.getByLabelText("Email");
       const passwordInput = screen.getByLabelText("Password");
       const submitButton = screen.getByRole("button", { name: "Log in" });
@@ -216,7 +212,7 @@ describe("Given a LoginForm component", () => {
       await userEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(store.dispatch).toHaveBeenCalledWith(loginUserAction);
+        expect(spy).toHaveBeenCalledWith(userCredentials);
       });
     });
   });
