@@ -10,7 +10,7 @@ import { User, UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
 import { logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
-import { UserRegisterData, UserRegisterResponse } from "src/app/types";
+import { UserRegisterData, UserRegisterResponse } from "../../types";
 
 @Injectable({
   providedIn: "root",

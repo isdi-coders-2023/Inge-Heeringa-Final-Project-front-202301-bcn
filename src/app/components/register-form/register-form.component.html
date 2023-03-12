@@ -1,4 +1,5 @@
-<form class="register-form" role="form" [formGroup]="registerForm" autocomplete="off" novalidate>
+<form class="register-form" role="form" [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()"
+  novalidate>
   <mat-form-field class="register-form__field" appearance="outline" color="accent">
     <mat-label class="register-form__label" for="username" aria-label="username">Username</mat-label>
     <input class="register-form__input" type="username" id="username" matInput formControlName="username" required>
