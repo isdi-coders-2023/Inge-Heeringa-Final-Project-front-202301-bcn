@@ -29,8 +29,12 @@ export class UserService {
     private readonly store: Store
   ) {}
 
-  public get userEndpoint(): string {
+  public get userLoginEndpoint(): string {
     return this.userLoginUrl;
+  }
+
+  public get userRegisterEndpoint(): string {
+    return this.userRegisterUrl;
   }
 
   login(userCredentials: UserCredentials): Observable<User> {

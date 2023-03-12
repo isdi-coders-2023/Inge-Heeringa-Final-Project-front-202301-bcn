@@ -44,7 +44,7 @@ describe("Given a User Service", () => {
     httpMock.verify();
   });
 
-  describe("When its getToken method is invoked with credentials 'test@example.com' and password 'password123'", () => {
+  describe("When its login method is invoked with credentials 'test@example.com' and password 'password123'", () => {
     test("Then it should make a POST request to the login endpoint", () => {
       const credentials = {
         email: "test@example.com",
@@ -56,7 +56,7 @@ describe("Given a User Service", () => {
         expect(response).toEqual(mockResponse);
       });
 
-      const req = httpMock.expectOne(`${userService.userEndpoint}`);
+      const req = httpMock.expectOne(`${userService.userLoginEndpoint}`);
       expect(req.request.method).toEqual("POST");
       expect(req.request.body).toEqual(credentials);
 
@@ -64,7 +64,7 @@ describe("Given a User Service", () => {
     });
   });
 
-  describe("When its getToken method is invoked and an HttpErrorResponse with an error field is thrown", () => {
+  describe("When its login method is invoked and an HttpErrorResponse with an error field is thrown", () => {
     test("Then it should call the showErrorModal method of the uiService", () => {
       const mockError = { error: { error: "mockError" } };
       const spy = jest.spyOn(uiService, "showErrorModal");
@@ -76,7 +76,7 @@ describe("Given a User Service", () => {
     });
   });
 
-  describe("When its getToken method is invoked and an HttpErrorResponse with a message field is thrown", () => {
+  describe("When its login method is invoked and an HttpErrorResponse with a message field is thrown", () => {
     test("Then it should call the showErrorModal method of the uiService", () => {
       const mockError = { error: "error", message: "mockError" };
       const spy = jest.spyOn(uiService, "showErrorModal");
@@ -85,6 +85,27 @@ describe("Given a User Service", () => {
       expect(spy).toHaveBeenCalledWith(mockError.message);
 
       spy.mockRestore();
+    });
+  });
+
+  describe("When its register method is invoked with valid register data'", () => {
+    test("Then it should make a POST request to the register endpoint", () => {
+      const registerData = {
+        username: "testuser",
+        email: "test@example.com",
+        password: "password123",
+      };
+      const mockResponse = { message: "Register successful" };
+
+      userService.register(registerData).subscribe((response) => {
+        expect(response).toEqual(mockResponse);
+      });
+
+      const req = httpMock.expectOne(`${userService.userRegisterEndpoint}`);
+      expect(req.request.method).toEqual("POST");
+      expect(req.request.body).toEqual(registerData);
+
+      req.flush(mockResponse);
     });
   });
 });
