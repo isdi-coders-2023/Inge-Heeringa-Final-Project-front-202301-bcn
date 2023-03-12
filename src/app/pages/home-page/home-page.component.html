@@ -8,7 +8,7 @@
     <a class="hero-section__cta" routerLink="/users/register">Sign up</a>
     <a class="hero-section__cta" routerLink="/users/login">Log in</a>
   </div>
-  <ng-container *ngIf="isLogged$ | async">
-    <button class="hero-section__cta" (click)="logoutUser()">Log out</button>
-  </ng-container>
+  <div *ngIf="isLogged$ | async">
+    <a class="hero-section__cta" (click)="logoutUser()" routerLink="/">Log out</a>
+  </div>
 </section>

@@ -80,7 +80,7 @@ describe("Given a HomePageComponent", () => {
 
       await renderComponent();
 
-      const cta = screen.getByRole("button", { name: ctaText });
+      const cta = screen.getByRole("link", { name: ctaText });
 
       expect(cta).toBeInTheDocument();
     });
