@@ -17,6 +17,7 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { UiModule } from "./store/ui/ui.module";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 import { LoadingComponent } from "./components/loading/loading.component";
+import { RegisterFormComponent } from "./components/register-form/register-form.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingComponent } from "./components/loading/loading.component";
     HomePageComponent,
     NotFoundPageComponent,
     LoadingComponent,
+    RegisterFormComponent,
   ],
   imports: [
     BrowserModule,
