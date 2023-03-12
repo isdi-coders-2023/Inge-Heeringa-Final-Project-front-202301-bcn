@@ -9,8 +9,8 @@
     <mat-label class="login-form__label" for="password" aria-label="password">Password</mat-label>
     <input class="login-form__input" type="password" id="password" matInput formControlName="password" required>
     <mat-error *ngIf="loginForm.controls['password'].hasError('required')">You must enter a password</mat-error>
-    <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Password must be at least 8 characters
-      long</mat-error>
+    <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Password must have at least 8
+      characters</mat-error>
     <mat-error *ngIf="loginForm.controls['password'].hasError('maxlength')">Maximum password length is 20
       characters</mat-error>
   </mat-form-field>
