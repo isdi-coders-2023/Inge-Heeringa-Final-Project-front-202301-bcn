@@ -4,11 +4,9 @@
       class="hero-section__logo">
     <span class="hero-section__slogan">Collaborate. Create. Succeed.</span>
   </div>
-  <div class="button-wrapper" *ngIf="!(isLogged$ | async)">
-    <a class="hero-section__cta" routerLink="/users/register">Sign up</a>
-    <a class="hero-section__cta" routerLink="/users/login">Log in</a>
+  <div class="button-wrapper">
+    <a class="hero-section__cta" routerLink="/users/register" *ngIf="!(isLogged$ | async)">Sign up</a>
+    <a class="hero-section__cta" routerLink="/users/login" *ngIf="!(isLogged$ | async)">Log in</a>
+    <a class="hero-section__cta" (click)="logoutUser()" routerLink="/" *ngIf="isLogged$ | async">Log out</a>
   </div>
-  <ng-container *ngIf="isLogged$ | async">
-    <button class="hero-section__cta" (click)="logoutUser()">Log out</button>
-  </ng-container>
 </section>

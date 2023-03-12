@@ -19,6 +19,7 @@ import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.com
 import { LoadingComponent } from "./components/loading/loading.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { RegisterPageComponent } from "./pages/register-page/register-page.component";
+import { HeaderComponent } from "./components/header/header.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterPageComponent } from "./pages/register-page/register-page.compo
     LoadingComponent,
     RegisterFormComponent,
     RegisterPageComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
+import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { type Observable } from "rxjs";
 import { UserService } from "../../services/user/user.service";
 import { selectIsLogged } from "../../store/user/user.reducer";
 
@@ -12,9 +13,14 @@ import { selectIsLogged } from "../../store/user/user.reducer";
 export class HomePageComponent {
   isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
 
-  constructor(public store: Store, private readonly userService: UserService) {}
+  constructor(
+    @Inject(Store) public store: Store,
+    @Inject(UserService) private readonly userService: UserService,
+    @Inject(Router) private readonly router: Router
+  ) {}
 
-  logoutUser() {
+  async logoutUser() {
     this.userService.logout();
+    await this.router.navigate(["/"]);
   }
 }

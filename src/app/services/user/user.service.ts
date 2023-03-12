@@ -11,7 +11,7 @@ import { UiService } from "../ui/ui.service";
 import { logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
 import { UserRegisterData, UserRegisterResponse } from "../../types";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: "root",

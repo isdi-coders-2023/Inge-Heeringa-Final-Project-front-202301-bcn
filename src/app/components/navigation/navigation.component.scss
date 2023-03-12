@@ -7,10 +7,12 @@
   color: map-get(variables.$primary-color, "main");
   background-color: map-get(variables.$accent-color, "main");
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  left: 0;
   padding: 0 43px;
   height: 60px;
+  z-index: 1;
 }
 
 .navigation-icon {
@@ -59,9 +61,18 @@
 
 @media (min-width: 768px) {
   :host {
+    position: relative;
     top: 0;
-    justify-content: flex-end;
-    padding: 0 50px;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get(variables.$primary-color, "main");
+    background-color: transparent;
   }
 
   .navigation__link {

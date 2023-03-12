@@ -1,0 +1,71 @@
+@use "../../../styles/partials/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: map-get(variables.$primary-color, "main");
+  background-color: map-get(variables.$accent-color, "main");
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 60px;
+  padding: 0 30px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  &__logo {
+    width: 80px;
+    height: auto;
+    position: absolute;
+    left: 30px;
+  }
+
+  &__cta {
+    font-family: variables.$display-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: variables.$secondary-color;
+    background-color: map-get(variables.$primary-color, "main");
+    width: 80px;
+    height: 35px;
+    font-size: 18px;
+    border-radius: 20px;
+    transition: 0.2s;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .header {
+    &__cta {
+      border: 2px solid map-get(variables.$primary-color, "main");
+      color: map-get(variables.$primary-color, "main");
+      background-color: transparent;
+      width: 104px;
+      height: 41px;
+      font-size: 20px;
+
+      &:hover {
+        color: variables.$secondary-color;
+        background-color: map-get(variables.$primary-color, "main");
+      }
+    }
+  }
+}
