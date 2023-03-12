@@ -1,22 +1,27 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { render, screen } from "@testing-library/angular";
+import "@testing-library/jest-dom";
 import { RegisterPageComponent } from "./register-page.component";
 
-describe("RegisterPageComponent", () => {
-  let component: RegisterPageComponent;
-  let fixture: ComponentFixture<RegisterPageComponent>;
+describe("Given a RegisterPageComponent", () => {
+  describe("When rendered", () => {
+    test("Then it should show the title 'Sign up' in a heading", async () => {
+      const title = /sign up/i;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [RegisterPageComponent],
-    }).compileComponents();
+      await render(RegisterPageComponent);
 
-    fixture = TestBed.createComponent(RegisterPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      const registerTitle = screen.getByRole("heading", { name: title });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+      expect(registerTitle).toBeInTheDocument();
+    });
+
+    test("Then it should show a redirect link to the login page", async () => {
+      const linkText = /already a member\? log in/i;
+
+      await render(RegisterPageComponent);
+
+      const redirectLink = screen.getByRole("link", { name: linkText });
+
+      expect(redirectLink).toBeInTheDocument();
+    });
   });
 });
