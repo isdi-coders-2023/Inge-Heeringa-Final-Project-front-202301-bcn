@@ -10,6 +10,7 @@ import { User, UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
 import { logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
+import { UserRegisterData, UserRegisterResponse } from "src/app/types";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +20,8 @@ export class UserService {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
   };
 
-  private readonly userUrl = `${environment.apiUrl}${environment.paths.users}${environment.paths.login}`;
+  private readonly userLoginUrl = `${environment.apiUrl}${environment.paths.users}${environment.paths.login}`;
+  private readonly userRegisterUrl = `${environment.apiUrl}${environment.paths.users}${environment.paths.register}`;
 
   constructor(
     private readonly http: HttpClient,
@@ -28,12 +30,12 @@ export class UserService {
   ) {}
 
   public get userEndpoint(): string {
-    return this.userUrl;
+    return this.userLoginUrl;
   }
 
   login(userCredentials: UserCredentials): Observable<User> {
     return this.http
-      .post<User>(this.userUrl, userCredentials, this.httpOptions)
+      .post<User>(this.userLoginUrl, userCredentials, this.httpOptions)
       .pipe(
         catchError((error) =>
           this.handleError(error as HttpErrorResponse, this.uiService)
@@ -44,6 +46,20 @@ export class UserService {
   logout() {
     this.store.dispatch(logoutUser());
     localStorage.removeItem("token");
+  }
+
+  register(registerData: UserRegisterData): Observable<UserRegisterResponse> {
+    return this.http
+      .post<UserRegisterResponse>(
+        this.userRegisterUrl,
+        registerData,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error) =>
+          this.handleError(error as HttpErrorResponse, this.uiService)
+        )
+      );
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {

@@ -4,5 +4,6 @@ export const environment = {
   paths: {
     users: "/users",
     login: "/login",
+    register: "/register",
   },
 };
