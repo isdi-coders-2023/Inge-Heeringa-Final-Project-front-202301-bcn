@@ -139,8 +139,7 @@ describe("Given a LoginForm component", () => {
 
   describe("When the entered password is shorter than 8 characters", () => {
     test("Then it should show the validation error 'Password must be at least 8 characters long'", async () => {
-      const expectedErrorMessage =
-        /password must be at least 8 characters long/i;
+      const expectedErrorMessage = /password must have at least 8 characters/i;
 
       await renderComponent();
 
