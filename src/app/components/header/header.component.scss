@@ -30,19 +30,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid map-get(variables.$primary-color, "main");
-    color: map-get(variables.$primary-color, "main");
-    background-color: transparent;
-    width: 104px;
-    height: 41px;
-    font-size: 20px;
+    color: variables.$secondary-color;
+    background-color: map-get(variables.$primary-color, "main");
+    width: 80px;
+    height: 35px;
+    font-size: 18px;
     border-radius: 20px;
     transition: 0.2s;
-
-    &:hover {
-      color: variables.$secondary-color;
-      background-color: map-get(variables.$primary-color, "main");
-    }
   }
 }
 
@@ -66,6 +60,20 @@
   .header {
     &__logo {
       left: 30px;
+    }
+
+    &__cta {
+      border: 2px solid map-get(variables.$primary-color, "main");
+      color: map-get(variables.$primary-color, "main");
+      background-color: transparent;
+      width: 104px;
+      height: 41px;
+      font-size: 20px;
+
+      &:hover {
+        color: variables.$secondary-color;
+        background-color: map-get(variables.$primary-color, "main");
+      }
     }
   }
 }

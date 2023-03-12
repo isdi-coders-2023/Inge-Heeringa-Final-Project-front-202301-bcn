@@ -7,8 +7,6 @@
   <div class="button-wrapper" *ngIf="!(isLogged$ | async)">
     <a class="hero-section__cta" routerLink="/users/register">Sign up</a>
     <a class="hero-section__cta" routerLink="/users/login">Log in</a>
-  </div>
-  <div *ngIf="isLogged$ | async">
-    <a class="hero-section__cta" (click)="logoutUser()" routerLink="/">Log out</a>
+    <a class="hero-section__cta" (click)="logoutUser()" routerLink="/" *ngIf="isLogged$ | async">Log out</a>
   </div>
 </section>
