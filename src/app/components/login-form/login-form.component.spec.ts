@@ -192,13 +192,13 @@ describe("Given a LoginForm component", () => {
   });
 
   describe("When the user submits the form with the correct credentials email 'mock@user.com' and password 'safepassword123'", () => {
-    test("Then its 'login' method should be invoked", async () => {
+    test("Then dispatch should be invoked with the Login User action", async () => {
       const userCredentials: UserCredentials = {
         email: "mock@user.com",
         password: "safepassword123",
       };
 
-      const loginAction = loginUser({
+      const loginUserAction = loginUser({
         payload: {
           email: "mock@user.com",
           token:
@@ -216,7 +216,7 @@ describe("Given a LoginForm component", () => {
       await userEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(store.dispatch).toHaveBeenCalledWith(loginAction);
+        expect(store.dispatch).toHaveBeenCalledWith(loginUserAction);
       });
     });
   });

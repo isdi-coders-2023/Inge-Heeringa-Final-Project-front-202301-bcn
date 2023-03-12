@@ -1,14 +1,35 @@
+import { HttpClient } from "@angular/common/http";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { render, screen } from "@testing-library/angular";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { Store } from "@ngrx/store";
+import { render, screen, waitFor } from "@testing-library/angular";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event/";
+import { UserService } from "../../services/user/user.service";
+import { MockUserService } from "../../spec/user.service.mock";
+import { UserRegisterData } from "../../types";
+import { createMockStore } from "../../spec/mockStore";
 import { RegisterFormComponent } from "./register-form.component";
 
 const renderComponent = async () => {
+  const store = createMockStore();
+  const userService = new MockUserService();
   await render(RegisterFormComponent, {
-    imports: [MatInputModule, ReactiveFormsModule],
+    imports: [
+      MatInputModule,
+      ReactiveFormsModule,
+      HttpClientTestingModule,
+      MatSnackBarModule,
+    ],
+    providers: [
+      HttpClient,
+      { provide: Store, useValue: store },
+      { provide: UserService, useValue: userService },
+    ],
   });
+  return { store, userService };
 };
 
 describe("Given a RegisterForm component", () => {
@@ -228,6 +249,33 @@ describe("Given a RegisterForm component", () => {
       const errorMessage = screen.getByText(expectedErrorMessage);
 
       expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user submits the form with valid register data", () => {
+    test("Then the UserService's 'register' method should be invoked", async () => {
+      const registerData: UserRegisterData = {
+        username: "mockuser",
+        email: "mock@user.com",
+        password: "safepassword123",
+      };
+
+      const { userService } = await renderComponent();
+      const spy = jest.spyOn(userService, "register");
+
+      const usernameInput = screen.getByLabelText("username");
+      const emailInput = screen.getByLabelText("Email");
+      const passwordInput = screen.getByLabelText("Password");
+      const submitButton = screen.getByRole("button", { name: "Sign up" });
+
+      await userEvent.type(usernameInput, registerData.username);
+      await userEvent.type(emailInput, registerData.email);
+      await userEvent.type(passwordInput, registerData.password);
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(spy).toHaveBeenCalledWith(registerData);
+      });
     });
   });
 });

@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { UiService } from "../../services/ui/ui.service";
+import { UserService } from "../../services/user/user.service";
+import { UserRegisterData } from "../../types";
 
 @Component({
   selector: "app-register-form",
@@ -31,5 +34,19 @@ export class RegisterFormComponent {
     ],
   });
 
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly userService: UserService,
+    private readonly uiService: UiService
+  ) {}
+
+  onSubmit() {
+    this.uiService.showLoading();
+
+    const registerData = this.registerForm.value as UserRegisterData;
+
+    this.userService.register(registerData).subscribe(async (data) => {
+      this.uiService.hideLoading();
+    });
+  }
 }
