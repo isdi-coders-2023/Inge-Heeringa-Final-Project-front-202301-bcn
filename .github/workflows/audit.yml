@@ -28,6 +28,14 @@ jobs:
       - name: 💾 Install modules
         run: npm ci
 
+      - name: Environments
+        run: npm run env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          USERS_PATH: ${{ secrets.USERS_PATH }}
+          LOGIN_PATH: ${{ secrets.LOGIN_PATH }}
+          REGISTER_PATH: ${{ secrets.REGISTER_PATH }}
+
       - name: 🔍 ESLint validation
         run: npx eslint --ignore-path .gitignore . --max-warnings 0
 
