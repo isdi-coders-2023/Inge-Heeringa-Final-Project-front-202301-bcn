@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { SnackBarService } from "../snackbar/snackbar.service";
 import { UiService } from "./ui.service";
-import { showModal } from "../../store/ui/ui.actions";
+import { hideLoading, showLoading, showModal } from "../../store/ui/ui.actions";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UiState } from "../../store/ui/types";
@@ -36,9 +36,9 @@ describe("Given a Ui Service", () => {
   });
 
   describe("When its method showErrorModal is invoked", () => {
-    test("Then it should dispatch the showModal action with a payload containing a positive isError status and an error message", () => {
-      const errorMessage = "Login failed";
+    const errorMessage = "Login failed";
 
+    test("Then it should dispatch the showModal action with a payload containing a positive isError status and an error message", () => {
       uiService.showErrorModal(errorMessage);
 
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -47,7 +47,6 @@ describe("Given a Ui Service", () => {
     });
 
     test("Then it should invoke the openSnackBar method of the SnackBar Service with an error message and a custom class 'error'", () => {
-      const errorMessage = "Login failed";
       const customClass = "error";
 
       uiService.showErrorModal(errorMessage);
@@ -56,6 +55,45 @@ describe("Given a Ui Service", () => {
         errorMessage,
         customClass
       );
+    });
+  });
+
+  describe("When its method showSuccessModal is invoked", () => {
+    const successMessage = "Your account has been created";
+
+    test("Then it should dispatch the showModal action with a payload containing a negative isError status and a success message", () => {
+      uiService.showSuccessModal(successMessage);
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        showModal({ payload: { isError: false, modalMessage: successMessage } })
+      );
+    });
+
+    test("Then it should invoke the openSnackBar method of the SnackBar Service with a success message and a custom class 'success'", () => {
+      const customClass = "success";
+
+      uiService.showSuccessModal(successMessage);
+
+      expect(snackBarService.openSnackBar).toHaveBeenCalledWith(
+        successMessage,
+        customClass
+      );
+    });
+  });
+
+  describe("When its method showLoading is invoked", () => {
+    test("Then it should dispatch the showLoading action", () => {
+      uiService.showLoading();
+
+      expect(store.dispatch).toHaveBeenCalledWith(showLoading());
+    });
+  });
+
+  describe("When its method hideLoading is invoked", () => {
+    test("Then it should dispatch the hideLoading action", () => {
+      uiService.hideLoading();
+
+      expect(store.dispatch).toHaveBeenCalledWith(hideLoading());
     });
   });
 });
