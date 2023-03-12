@@ -1,22 +1,62 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { MatInputModule } from "@angular/material/input";
+import { render, screen } from "@testing-library/angular";
+import "@testing-library/jest-dom";
 import { RegisterFormComponent } from "./register-form.component";
 
-describe("RegisterFormComponent", () => {
-  let component: RegisterFormComponent;
-  let fixture: ComponentFixture<RegisterFormComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [RegisterFormComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(RegisterFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+const renderComponent = async () => {
+  await render(RegisterFormComponent, {
+    imports: [MatInputModule],
   });
+};
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+describe("Given a RegisterForm component", () => {
+  describe("When rendered", () => {
+    test("Then it should show a form", async () => {
+      await renderComponent();
+
+      const form = screen.getByRole("form");
+
+      expect(form).toBeInTheDocument();
+    });
+
+    test("Then it should show an input field for a username", async () => {
+      const labelText = "Username";
+
+      await renderComponent();
+
+      const emailInput = screen.getByLabelText(labelText);
+
+      expect(emailInput).toBeInTheDocument();
+    });
+
+    test("Then it should show an input field for an email address", async () => {
+      const labelText = "Email";
+
+      await renderComponent();
+
+      const emailInput = screen.getByLabelText(labelText);
+
+      expect(emailInput).toBeInTheDocument();
+    });
+
+    test("Then it should show an input field for a password", async () => {
+      const labelText = "Password";
+
+      await renderComponent();
+
+      const passwordInput = screen.getByLabelText(labelText);
+
+      expect(passwordInput).toBeInTheDocument();
+    });
+
+    test("Then it should show a submit button with the text 'Sign up'", async () => {
+      const buttonText = "Sign up";
+
+      await renderComponent();
+
+      const submitButton = screen.getByRole("button", { name: buttonText });
+
+      expect(submitButton).toBeInTheDocument();
+    });
   });
 });
