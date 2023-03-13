@@ -20,6 +20,7 @@ import { LoadingComponent } from "./components/loading/loading.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { RegisterPageComponent } from "./pages/register-page/register-page.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { PostsModule } from "./store/posts/posts.module";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { HeaderComponent } from "./components/header/header.component";
     ReactiveFormsModule,
     HttpClientModule,
     UiModule,
+    PostsModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
