@@ -19,7 +19,7 @@ export class MockUserService {
   }
 
   login() {
-    return of();
+    jest.fn();
   }
 
   register(registerData: UserRegisterData): Observable<UserRegisterResponse> {

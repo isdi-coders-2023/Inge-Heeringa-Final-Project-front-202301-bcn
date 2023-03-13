@@ -11,6 +11,8 @@ import { loginUser, logoutUser } from "../../store/user/user.actions";
 import { Store } from "@ngrx/store";
 import { type UserRegisterData, type UserRegisterResponse } from "../../types";
 import { environment } from "../../../environments/environment.prod";
+import { selectIsLogged } from "../../store/user/user.reducer";
+import { TokenService } from "../token/token.service";
 
 @Injectable({
   providedIn: "root",
@@ -24,9 +26,10 @@ export class UserService {
   private readonly userRegisterUrl = `${environment.apiUrl}${environment.paths.users}${environment.paths.register}`;
 
   constructor(
+    @Inject(Store) private readonly store: Store,
     @Inject(HttpClient) private readonly http: HttpClient,
     @Inject(UiService) private readonly uiService: UiService,
-    @Inject(Store) private readonly store: Store
+    @Inject(TokenService) private readonly tokenService: TokenService
   ) {}
 
   public get userLoginEndpoint(): string {
@@ -53,7 +56,7 @@ export class UserService {
 
   logout() {
     this.store.dispatch(logoutUser());
-    localStorage.removeItem("token");
+    this.tokenService.removeToken();
   }
 
   register(registerData: UserRegisterData): Observable<UserRegisterResponse> {
@@ -68,6 +71,10 @@ export class UserService {
           this.handleError(error as HttpErrorResponse, this.uiService)
         )
       );
+  }
+
+  getIsLogged() {
+    return this.store.select(selectIsLogged);
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {

@@ -9,11 +9,9 @@ import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { Store } from "@ngrx/store";
 import { MockUserService } from "../../spec/user.service.mock";
-import { loginUser } from "../../store/user/user.actions";
 import { createMockStore } from "../../spec/mockStore";
 import { type UserCredentials } from "../../store/user/types";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { hideLoading, showLoading } from "../../store/ui/ui.actions";
 
 const renderComponent = async () => {
   const store = createMockStore();

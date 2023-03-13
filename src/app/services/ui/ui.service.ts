@@ -4,6 +4,7 @@ import { type Observable } from "rxjs";
 import { selectIsLoading } from "../../store/ui/ui.reducer";
 import { hideLoading, showLoading, showModal } from "../../store/ui/ui.actions";
 import { SnackBarService } from "../snackbar/snackbar.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,8 @@ export class UiService {
   constructor(
     @Inject(Store) private readonly store: Store,
     @Inject(SnackBarService)
-    private readonly snackbarService: SnackBarService
+    private readonly snackbarService: SnackBarService,
+    @Inject(Router) public router: Router
   ) {}
 
   showErrorModal(errorMessage: string) {
@@ -43,5 +45,9 @@ export class UiService {
 
   hideLoading() {
     this.store.dispatch(hideLoading());
+  }
+
+  redirectUser(route: string) {
+    (async () => this.router.navigate([route]))();
   }
 }

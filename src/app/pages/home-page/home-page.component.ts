@@ -1,9 +1,8 @@
 import { Component, Inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
 import { type Observable } from "rxjs";
+import { UiService } from "../../services/ui/ui.service";
 import { UserService } from "../../services/user/user.service";
-import { selectIsLogged } from "../../store/user/user.reducer";
 
 @Component({
   selector: "app-home-page",
@@ -11,16 +10,16 @@ import { selectIsLogged } from "../../store/user/user.reducer";
   styleUrls: ["./home-page.component.scss"],
 })
 export class HomePageComponent {
-  isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
+  isLogged$: Observable<boolean> = this.userService.getIsLogged();
 
   constructor(
-    @Inject(Store) public store: Store,
     @Inject(UserService) private readonly userService: UserService,
-    @Inject(Router) private readonly router: Router
+    @Inject(Router) private readonly router: Router,
+    @Inject(UiService) private readonly uiService: UiService
   ) {}
 
   async logoutUser() {
     this.userService.logout();
-    await this.router.navigate([""]);
+    this.uiService.redirectUser("");
   }
 }
