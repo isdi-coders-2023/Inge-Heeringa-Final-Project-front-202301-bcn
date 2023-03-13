@@ -7,6 +7,7 @@ import { hideLoading, showLoading, showModal } from "../../store/ui/ui.actions";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { type UiState } from "../../store/ui/types";
+import { type Observable } from "rxjs";
 
 let uiService: UiService;
 let store: MockStore;
@@ -94,6 +95,30 @@ describe("Given a Ui Service", () => {
       uiService.hideLoading();
 
       expect(store.dispatch).toHaveBeenCalledWith(hideLoading());
+    });
+  });
+
+  describe("When its method getIsLoading is invoked and isLoading is true", () => {
+    test("Then it should return a positive isLoading state from the store", () => {
+      store.setState({ ...initialState, isLoading: true });
+
+      const isLoading$: Observable<boolean> = uiService.getIsLoading();
+
+      isLoading$.subscribe((isLoading) => {
+        expect(isLoading).toBe(true);
+      });
+    });
+  });
+
+  describe("When its method getIsLoading is invoked and isLoading is false", () => {
+    test("Then it should return a negative isLoading state from the store", () => {
+      store.setState({ ...initialState, isLoading: false });
+
+      const isLoading$: Observable<boolean> = uiService.getIsLoading();
+
+      isLoading$.subscribe((isLoading) => {
+        expect(isLoading).toBe(false);
+      });
     });
   });
 });

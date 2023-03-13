@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { type Observable } from "rxjs";
+import { UiService } from "../../services/ui/ui.service";
 import { UserService } from "../../services/user/user.service";
 
 @Component({
@@ -14,11 +15,12 @@ export class HeaderComponent {
 
   constructor(
     @Inject(Router) public router: Router,
-    @Inject(UserService) private readonly userService: UserService
+    @Inject(UserService) private readonly userService: UserService,
+    @Inject(UiService) private readonly uiService: UiService
   ) {}
 
-  async logoutUser() {
+  logoutUser() {
     this.userService.logout();
-    (async () => this.router.navigate([""]))();
+    this.uiService.redirectUser("");
   }
 }
