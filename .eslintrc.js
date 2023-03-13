@@ -9,11 +9,6 @@ module.exports = {
       extends: ["xo-typescript", "prettier"],
       files: ["*.ts"],
       rules: {
-        // "@typescript-eslint/consistent-type-imports": "off",
-        "@typescript-eslint/no-unnecessary-type-assertion": [
-          "error",
-          { typesToIgnore: ["CustomTokenPayload"] },
-        ],
         "@typescript-eslint/consistent-type-definitions": [
           "error",
           "interface",

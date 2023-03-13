@@ -21,6 +21,6 @@ export class HomePageComponent {
 
   async logoutUser() {
     this.userService.logout();
-    await this.router.navigate(["/"]);
+    await this.router.navigate([""]);
   }
 }
