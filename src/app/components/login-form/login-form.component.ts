@@ -45,7 +45,7 @@ export class LoginFormComponent {
     this.userService.getToken(userCredentials).subscribe(async (data) => {
       const { token } = data;
 
-      const { email } = decode(token) as CustomTokenPayload;
+      const { email }: CustomTokenPayload = decode(token);
 
       localStorage.setItem("token", token);
 

@@ -9,7 +9,8 @@
     <a class="header__cta" routerLink="/users/login"
       *ngIf="!(isLogged$ | async) && !(authUrls.includes(this.router.url))">Log
       in</a>
-    <a class="header__cta" routerLink="/" *ngIf="(isLogged$ | async) && !(authUrls.includes(this.router.url))">Log
+    <a class="header__cta" routerLink="/" (click)="logoutUser()"
+      *ngIf="(isLogged$ | async) && !(authUrls.includes(this.router.url))">Log
       out</a>
   </div>
 </header>

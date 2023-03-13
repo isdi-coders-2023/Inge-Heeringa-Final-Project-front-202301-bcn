@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const { email } = decode(token) as CustomTokenPayload;
+      const { email }: CustomTokenPayload = decode(token);
 
       this.store.dispatch(loginUser({ payload: { email, token } }));
     }

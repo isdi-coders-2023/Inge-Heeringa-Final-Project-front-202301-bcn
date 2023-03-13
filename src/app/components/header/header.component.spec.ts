@@ -1,10 +1,8 @@
-import { TestBed } from "@angular/core/testing";
-import { Router } from "@angular/router";
-import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { provideMockStore } from "@ngrx/store/testing";
-import { render, screen, waitFor } from "@testing-library/angular";
+import { render, screen } from "@testing-library/angular";
 import "@testing-library/jest-dom";
-import { NotFoundPageComponent } from "../../pages/not-found-page/not-found-page.component";
 import { selectIsLogged } from "../../store/user/user.reducer";
 import { HeaderComponent } from "./header.component";
 
@@ -14,6 +12,7 @@ describe("Given a Header component", () => {
       const altText = /peer2peer logo/i;
 
       await render(HeaderComponent, {
+        imports: [HttpClientTestingModule, MatSnackBarModule],
         providers: [
           provideMockStore({
             selectors: [{ selector: selectIsLogged, value: false }],
