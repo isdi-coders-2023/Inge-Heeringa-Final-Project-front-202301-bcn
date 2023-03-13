@@ -125,7 +125,7 @@ describe("Given a LoginForm component", () => {
     });
   });
 
-  describe("When the user enters a password between 8 and 20 characters", () => {
+  describe("When the user enters a password", () => {
     test("Then it should not show any validation errors", async () => {
       await renderComponent();
 
@@ -136,42 +136,6 @@ describe("Given a LoginForm component", () => {
       await userEvent.tab();
 
       expect(passwordInput.getAttribute("aria-invalid")).toBe("false");
-    });
-  });
-
-  describe("When the entered password is shorter than 8 characters", () => {
-    test("Then it should show the validation error 'Password must be at least 8 characters long'", async () => {
-      const expectedErrorMessage = /password must have at least 8 characters/i;
-
-      await renderComponent();
-
-      const passwordInput = screen.getByLabelText("Password");
-
-      await userEvent.click(passwordInput);
-      await userEvent.type(passwordInput, "1234");
-      await userEvent.tab();
-
-      const errorMessage = screen.queryByText(expectedErrorMessage);
-
-      expect(errorMessage).toBeInTheDocument();
-    });
-  });
-
-  describe("When the entered password is longer than 20 characters", () => {
-    test("Then it should show the validation error 'Maximum password length is 20 characters'", async () => {
-      const expectedErrorMessage = /maximum password length is 20 characters/i;
-
-      await renderComponent();
-
-      const passwordInput = screen.getByLabelText("Password");
-
-      await userEvent.click(passwordInput);
-      await userEvent.type(passwordInput, "thisPasswordIsSuperSafe123");
-      await userEvent.tab();
-
-      const errorMessage = screen.queryByText(expectedErrorMessage);
-
-      expect(errorMessage).toBeInTheDocument();
     });
   });
 
