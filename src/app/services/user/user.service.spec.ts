@@ -10,17 +10,16 @@ import { createMockStore } from "../../spec/mockStore";
 import { Store } from "@ngrx/store";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { loginUser } from "../../store/user/user.actions";
 
 describe("Given a User Service", () => {
   let userService: UserService;
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
   let uiService: UiService;
-  let mockStore;
+  const mockStore = createMockStore();
 
   beforeEach(() => {
-    mockStore = createMockStore();
-
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -44,7 +43,7 @@ describe("Given a User Service", () => {
     httpMock.verify();
   });
 
-  describe("When its login method is invoked with credentials 'test@example.com' and password 'password123'", () => {
+  describe("When its getToken method is invoked with credentials 'test@example.com' and password 'password123'", () => {
     test("Then it should make a POST request to the login endpoint", () => {
       const credentials = {
         email: "test@example.com",
@@ -64,7 +63,7 @@ describe("Given a User Service", () => {
     });
   });
 
-  describe("When its login method is invoked and an HttpErrorResponse with an error field is thrown", () => {
+  describe("When an HttpErrorResponse with an error field is thrown", () => {
     test("Then it should call the showErrorModal method of the uiService", () => {
       const mockError = { error: { error: "mockError" } };
       const spy = jest.spyOn(uiService, "showErrorModal");
@@ -76,7 +75,7 @@ describe("Given a User Service", () => {
     });
   });
 
-  describe("When its login method is invoked and an HttpErrorResponse with a message field is thrown", () => {
+  describe("When an HttpErrorResponse with a message field is thrown", () => {
     test("Then it should call the showErrorModal method of the uiService", () => {
       const mockError = { error: "error", message: "mockError" };
       const spy = jest.spyOn(uiService, "showErrorModal");
@@ -106,6 +105,28 @@ describe("Given a User Service", () => {
       expect(req.request.body).toEqual(registerData);
 
       req.flush(mockResponse);
+    });
+  });
+
+  describe("When its login method is invoked with an email and a token", () => {
+    test("Then dispatch should be invoked with a Login User action", () => {
+      const data = {
+        email: "test@example.com",
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJtb2NrQHVzZXIuY29tIiwiaWF0IjoxNTE2MjM5MDIyfQ.YPuy12VqswmM868VyJGPrrNSUWfyTC7GldVz2gLx9vU",
+      };
+
+      userService.login(data);
+
+      expect(mockStore.dispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When its logout method is invoked", () => {
+    test("Then dispatch should be invoked with a Logout User action", () => {
+      userService.logout();
+
+      expect(mockStore.dispatch).toHaveBeenCalled();
     });
   });
 });
