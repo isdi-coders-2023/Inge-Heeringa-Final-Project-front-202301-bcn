@@ -4,7 +4,7 @@ import { type Modal, type UiState } from "./types";
 import { reducer } from "./ui.reducer";
 
 const defaultAction = createAction("default");
-describe("Given a Ui Reducer funcion", () => {
+describe("Given a UI Reducer function", () => {
   describe("When it receives a UI state with an empty message and a negative isError status and a Show Modal action", () => {
     test("Then it should return a UI state with a message 'Wrong credentials' and a positive isError status", () => {
       const currentUiState: UiState = {
