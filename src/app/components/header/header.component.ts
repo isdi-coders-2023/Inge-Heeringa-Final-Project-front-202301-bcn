@@ -11,7 +11,7 @@ import { selectIsLogged } from "../../store/user/user.reducer";
 })
 export class HeaderComponent {
   isLogged$: Observable<boolean> = this.store.select(selectIsLogged);
-  urls = ["/", "/users/login", "/users/register"];
+  authUrls = ["/users/login", "/users/register"];
 
   constructor(
     @Inject(Store) public store: Store,
