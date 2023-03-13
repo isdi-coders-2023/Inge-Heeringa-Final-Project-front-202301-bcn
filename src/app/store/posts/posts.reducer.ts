@@ -8,12 +8,7 @@ export const postsFeature = createFeature({
   name: "posts",
   reducer: createReducer(
     initialState,
-    on(
-      loadPosts,
-      (currentState, { payload }): Posts => ({
-        ...payload,
-      })
-    )
+    on(loadPosts, (currentState, { payload }): Posts => [...payload])
   ),
 });
 

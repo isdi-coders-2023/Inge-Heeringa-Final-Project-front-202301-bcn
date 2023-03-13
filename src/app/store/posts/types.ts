@@ -6,7 +6,6 @@ export interface Post {
   stack: Stack;
   technologies: string[];
   yearsOfExperience: string;
-  username: string;
 }
 
 export enum Stack {

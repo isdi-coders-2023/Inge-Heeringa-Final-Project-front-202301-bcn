@@ -4,7 +4,6 @@ import {
   type HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-
 import { catchError, throwError, type Observable } from "rxjs";
 import { type User, type UserCredentials } from "../../store/user/types";
 import { UiService } from "../ui/ui.service";
