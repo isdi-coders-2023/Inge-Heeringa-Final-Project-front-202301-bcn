@@ -10,7 +10,6 @@ import { createMockStore } from "../../spec/mockStore";
 import { Store } from "@ngrx/store";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { loginUser } from "../../store/user/user.actions";
 
 describe("Given a User Service", () => {
   let userService: UserService;

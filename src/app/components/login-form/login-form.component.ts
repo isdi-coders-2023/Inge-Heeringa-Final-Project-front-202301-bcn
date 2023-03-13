@@ -4,10 +4,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from "../../services/user/user.service";
 import { type CustomTokenPayload } from "../../types";
 import { type UserCredentials } from "../../store/user/types";
-import { Store } from "@ngrx/store";
-import { loginUser } from "../../store/user/user.actions";
 import { UiService } from "../../services/ui/ui.service";
-import { Router } from "@angular/router";
+import { TokenService } from "../../services/token/token.service";
 
 @Component({
   selector: "app-login-form",
@@ -31,7 +29,7 @@ export class LoginFormComponent {
     @Inject(FormBuilder) private readonly fb: FormBuilder,
     @Inject(UserService) private readonly userService: UserService,
     @Inject(UiService) private readonly uiService: UiService,
-    @Inject(Router) public router: Router
+    @Inject(TokenService) private readonly tokenService: TokenService
   ) {}
 
   onSubmit() {
@@ -44,11 +42,11 @@ export class LoginFormComponent {
 
       const { email }: CustomTokenPayload = decode(token);
 
-      localStorage.setItem("token", token);
+      this.tokenService.storeToken(token);
 
       this.userService.login({ email, token });
       this.uiService.hideLoading();
-      await this.router.navigate(["/"]);
+      this.uiService.redirectUser("");
     });
   }
 }
