@@ -1,9 +1,8 @@
 import { Component, Inject, type OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
 import decode from "jwt-decode";
 import { type Observable } from "rxjs";
 import { UiService } from "./services/ui/ui.service";
-import { loginUser } from "./store/user/user.actions";
+import { UserService } from "./services/user/user.service";
 import { type CustomTokenPayload } from "./types";
 
 @Component({
@@ -15,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Inject(UiService) private readonly uiService: UiService,
-    @Inject(Store) private readonly store: Store
+    @Inject(UserService) private readonly userService: UserService
   ) {
     this.isLoading$ = this.uiService.getIsLoading();
   }
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit {
     if (token) {
       const { email }: CustomTokenPayload = decode(token);
 
-      this.store.dispatch(loginUser({ payload: { email, token } }));
+      this.userService.login({ email, token });
     }
   }
 }
