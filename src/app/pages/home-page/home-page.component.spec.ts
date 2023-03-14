@@ -3,6 +3,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { provideMockStore } from "@ngrx/store/testing";
 import { render, screen } from "@testing-library/angular";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import { type Observable, of } from "rxjs";
+import { UserService } from "../../services/user/user.service";
 import { selectIsLogged } from "../../store/user/user.reducer";
 import { HomePageComponent } from "./home-page.component";
 
@@ -83,6 +86,36 @@ describe("Given a HomePageComponent", () => {
       const button = screen.getByRole("link", { name: buttonText });
 
       expect(button).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user clicks on the 'Logout' button", () => {
+    const isLogged$: Observable<boolean> = of(true);
+    const mockUserService = {
+      getIsLogged: jest.fn(() => isLogged$),
+      logout: jest.fn(),
+    };
+    const renderComponent = async () => {
+      await render(HomePageComponent, {
+        imports: [HttpClientTestingModule, MatSnackBarModule],
+        providers: [
+          provideMockStore({
+            selectors: [{ selector: selectIsLogged, value: isLogged$ }],
+          }),
+          { provide: UserService, useValue: mockUserService },
+        ],
+      });
+    };
+
+    test("Then the component's logoutUser method should be invoked", async () => {
+      const buttonText = /log out/i;
+
+      await renderComponent();
+      const logoutButton = screen.getByRole("link", { name: buttonText });
+
+      await userEvent.click(logoutButton);
+
+      expect(mockUserService.logout).toHaveBeenCalled();
     });
   });
 });

@@ -1,14 +1,15 @@
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { provideMockStore } from "@ngrx/store/testing";
-import { render, screen, fireEvent } from "@testing-library/angular";
+import { render, screen } from "@testing-library/angular";
 import "@testing-library/jest-dom";
-import { UiService } from "../../services/ui/ui.service";
 import { UserService } from "../../services/user/user.service";
 import { selectIsLogged } from "../../store/user/user.reducer";
 import { HeaderComponent } from "./header.component";
 import { type Observable, of } from "rxjs";
 import userEvent from "@testing-library/user-event";
+import { NavigationComponent } from "../navigation/navigation.component";
+import { AppModule } from "../../app.module";
 
 describe("Given a Header component", () => {
   describe("When rendered", () => {
@@ -16,7 +17,8 @@ describe("Given a Header component", () => {
       const altText = /peer2peer logo/i;
 
       await render(HeaderComponent, {
-        imports: [HttpClientTestingModule, MatSnackBarModule],
+        declarations: [NavigationComponent],
+        imports: [AppModule, HttpClientTestingModule, MatSnackBarModule],
         providers: [
           provideMockStore({
             selectors: [{ selector: selectIsLogged, value: false }],
@@ -33,7 +35,8 @@ describe("Given a Header component", () => {
   describe("When the user is not logged", () => {
     const renderComponent = async () => {
       await render(HeaderComponent, {
-        imports: [HttpClientTestingModule, MatSnackBarModule],
+        declarations: [NavigationComponent],
+        imports: [AppModule, HttpClientTestingModule, MatSnackBarModule],
         providers: [
           provideMockStore({
             selectors: [{ selector: selectIsLogged, value: false }],
@@ -66,7 +69,8 @@ describe("Given a Header component", () => {
   describe("When the user is logged", () => {
     const renderComponent = async () => {
       await render(HeaderComponent, {
-        imports: [HttpClientTestingModule, MatSnackBarModule],
+        declarations: [NavigationComponent],
+        imports: [AppModule, HttpClientTestingModule, MatSnackBarModule],
         providers: [
           provideMockStore({
             selectors: [{ selector: selectIsLogged, value: true }],
@@ -94,7 +98,8 @@ describe("Given a Header component", () => {
     };
     const renderComponent = async () => {
       await render(HeaderComponent, {
-        imports: [HttpClientTestingModule, MatSnackBarModule],
+        declarations: [NavigationComponent],
+        imports: [AppModule, HttpClientTestingModule, MatSnackBarModule],
         providers: [
           provideMockStore({
             selectors: [{ selector: selectIsLogged, value: isLogged$ }],
