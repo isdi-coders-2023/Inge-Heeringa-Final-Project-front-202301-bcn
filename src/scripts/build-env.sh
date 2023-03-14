@@ -10,6 +10,7 @@ echo "    paths: {" >> ./src/environments/environment.ts
 echo "      users: \"$USERS_PATH\"," >> ./src/environments/environment.ts
 echo "      login: \"$LOGIN_PATH\"," >> ./src/environments/environment.ts
 echo "      register: \"$REGISTER_PATH\"," >> ./src/environments/environment.ts
+echo "      posts: \"$POSTS_PATH\"," >> ./src/environments/environment.ts
 echo "        }," >> ./src/environments/environment.ts
 echo "};" >> ./src/environments/environment.ts
 
@@ -21,6 +22,7 @@ echo "    paths: {" >> ./src/environments/environment.prod.ts
 echo "      users: \"$USERS_PATH\"," >> ./src/environments/environment.prod.ts
 echo "      login: \"$LOGIN_PATH\"," >> ./src/environments/environment.prod.ts
 echo "      register: \"$REGISTER_PATH\"," >> ./src/environments/environment.prod.ts
+echo "      posts: \"$POSTS_PATH\"," >> ./src/environments/environment.prod.ts
 echo "        }," >> ./src/environments/environment.prod.ts
 echo "};" >> ./src/environments/environment.prod.ts
 
