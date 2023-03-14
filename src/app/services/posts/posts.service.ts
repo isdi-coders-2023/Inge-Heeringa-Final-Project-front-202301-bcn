@@ -1,7 +1,6 @@
 import { HttpClient, type HttpErrorResponse } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { catchError, throwError, type Observable } from "rxjs";
-import { showLoading } from "src/app/store/ui/ui.actions";
 import { environment } from "../../../environments/environment";
 import { type Posts } from "../../store/posts/types";
 import { UiService } from "../ui/ui.service";
